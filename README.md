@@ -13,11 +13,11 @@ Download and install:
 
 ### Windows setup instructions
 1. Open the Visual Studio 2022 Professional as "administrator" and clone the ds-letter-of-no-evidence repository to the local folder
-![Package manager console](https://github.com/nationalarchives/ds-letter-of-no-evidence/assets/40386980/deafb43c-9b61-4856-97f6-5ebd46447e25)
 
 2. To create the LONE database on your local machine
 
 	I.   Open the Nuget package manager console on Visual Studio 2022 Professional
+		 ![Package manager console](https://github.com/nationalarchives/ds-letter-of-no-evidence/assets/40386980/deafb43c-9b61-4856-97f6-5ebd46447e25)
 	
 	II.  If you don't have migration script then run 
 		  `Add-Migration <any name for the script Eg: Initial-17-07-2023>` 
