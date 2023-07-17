@@ -1,3 +1,6 @@
+using letter_of_no_evidence.web.Helper;
+using Microsoft.AspNetCore.Mvc;
+
 namespace letter_of_no_evidence.web
 {
     public class Program
@@ -7,26 +10,48 @@ namespace letter_of_no_evidence.web
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddMvc(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/error");
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
+            app.RegisterTNACookieConsent();
+            //app.UseSecurityHeaderMiddleware();
             app.UseRouting();
 
+            var rootPath = Environment.GetEnvironmentVariable("LONE_Root_Path");
+            if (!string.IsNullOrWhiteSpace(rootPath))
+            {
+                app.Use((context, next) =>
+                {
+                    context.Request.PathBase = new PathString(rootPath);
+                    return next();
+                });
+            }
+            app.UseStaticFiles();
             app.UseAuthorization();
 
-            app.MapRazorPages();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "",
+                    new { controller = "Home", action = "Index" });
+            });
 
             app.Run();
         }

@@ -1,0 +1,70 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor
+@using letter_of_no_evidence.web.Helper
+@using Newtonsoft.Json
+<!DOCTYPE html>
+<html lang="en">
+@{
+    var usage = false;
+    string policy = httpContextAccessor.HttpContext.Request.Cookies[Constants.CookieName];
+    if (!string.IsNullOrWhiteSpace(policy))
+    {
+        var cookiePolicy = JsonConvert.DeserializeObject<CookiePolicy>(policy);
+        usage = cookiePolicy.Usage;
+    }
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <title>@ViewData["Title"]</title>
+
+    <script>document.getElementsByTagName("html")[0].className = "js";</script>
+
+    <link rel='stylesheet'
+          id='tna-parent-styles-css'
+          href='~/css/compiled-css/base-sass.min.css'
+          type='text/css'
+          media='all' />
+    <link rel='stylesheet'
+          href='~/css/ds-cookie-consent.css'
+          type='text/css'
+          media='all' />
+    <link href='https://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="~/images/favicon.png">
+
+    @if (usage)
+    {
+        <!-- Google Tag Manager -->
+        
+        <!-- End Google Tag Manager -->
+    }
+</head>
+<body>
+    @if (usage)
+    {
+        <!-- Google Tag Manager (noscript) -->
+
+        <!-- End Google Tag Manager (noscript) -->
+    }
+    @await Html.PartialAsync("Partials/_CookieConsent")
+    @await Html.PartialAsync("Partials/_Header")
+
+    <main class="kbs pb-3" id="main-content">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    @await Html.PartialAsync("Partials/_ContactFooter")
+    @await Html.PartialAsync("Partials/_Footer")
+    <script src="~/js/ds-cookie-consent.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/mega-menu.js"></script>
+    <script src="~/js/letter-of-no-evidence-0.0.1.js"></script>
+</body>
+</html>
