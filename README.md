@@ -17,12 +17,13 @@ Download and install:
 
 2. To create the LONE database on your local machine
 
-	I. Open the Nuget package manager console on Visual Studio 2022 Professional
+	I.   Open the Nuget package manager console on Visual Studio 2022 Professional
 	
-	II. Run the following commands 
-		If you don't have migration script then run `Add-Migration <any name for the script Eg: Initial-17-07-2023>` 
+	II.  If you don't have migration script then run 
+		  `Add-Migration <any name for the script Eg: Initial-17-07-2023>` 
 	
-		To create the database from migration script run `update-database`
+	III. To create the database from migration script run 
+		  `update-database`
 	
 3. In Visual Studio right click on the sln and select Properties. Set the solution to be multiple project startup and select letter-of-no-evidence.api and letter-of-no-evidence.web as startup projects in that order
 ![MultipleProjectStartup](https://github.com/nationalarchives/ds-letter-of-no-evidence/assets/40386980/a005d193-118a-4bfa-b72c-28630075996b)
