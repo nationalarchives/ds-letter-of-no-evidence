@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "letter-of-no-evidence.api", "letter-of-no-evidence.api\letter-of-no-evidence.api.csproj", "{B84DDFDD-D2C9-4D37-924B-6B6A7D98F101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "letter-of-no-evidence.data", "letter-of-no-evidence.data\letter-of-no-evidence.data.csproj", "{14BAF43C-0FBB-4BCD-A301-67295BBB2FB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "letter-of-no-evidence.domain", "letter-of-no-evidence.domain\letter-of-no-evidence.domain.csproj", "{366580B6-EF71-414D-934D-30B2532C025B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "letter-of-no-evidence.model", "letter-of-no-evidence.model\letter-of-no-evidence.model.csproj", "{6D936CDA-7BA2-4DC4-97C1-2DB6BA0DD191}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "letter-of-no-evidence.web", "letter-of-no-evidence.web\letter-of-no-evidence.web.csproj", "{630E9D07-C760-4A25-AF1D-7DB340629F24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B84DDFDD-D2C9-4D37-924B-6B6A7D98F101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B84DDFDD-D2C9-4D37-924B-6B6A7D98F101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B84DDFDD-D2C9-4D37-924B-6B6A7D98F101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B84DDFDD-D2C9-4D37-924B-6B6A7D98F101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14BAF43C-0FBB-4BCD-A301-67295BBB2FB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14BAF43C-0FBB-4BCD-A301-67295BBB2FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14BAF43C-0FBB-4BCD-A301-67295BBB2FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14BAF43C-0FBB-4BCD-A301-67295BBB2FB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{366580B6-EF71-414D-934D-30B2532C025B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{366580B6-EF71-414D-934D-30B2532C025B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{366580B6-EF71-414D-934D-30B2532C025B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{366580B6-EF71-414D-934D-30B2532C025B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D936CDA-7BA2-4DC4-97C1-2DB6BA0DD191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D936CDA-7BA2-4DC4-97C1-2DB6BA0DD191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D936CDA-7BA2-4DC4-97C1-2DB6BA0DD191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D936CDA-7BA2-4DC4-97C1-2DB6BA0DD191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{630E9D07-C760-4A25-AF1D-7DB340629F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{630E9D07-C760-4A25-AF1D-7DB340629F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{630E9D07-C760-4A25-AF1D-7DB340629F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{630E9D07-C760-4A25-AF1D-7DB340629F24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3EA5E809-0E9C-485F-8222-C6EC61A4620D}
+	EndGlobalSection
+EndGlobal
