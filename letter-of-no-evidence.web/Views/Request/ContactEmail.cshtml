@@ -1,0 +1,136 @@
+﻿@model letter_of_no_evidence.web.Models.RequestViewModel
+
+@{
+    ViewData["Title"] = "Contact details - The National Archives";
+}
+
+
+@await Html.PartialAsync("Partials/_Breadcrumbs")
+
+<h1 class="display-4">2. Enter contact details</h1>
+
+<div class="container content-wrapper">
+
+    <div class="text-center">
+        <section class="row" id="progress-bar">
+            <h2 class="sr-only">Progress</h2>
+            <div class="col-md-12">
+                <ol>
+                    <li><span class="step-number">1</span> <span class="step">Enter subject details</span></li>
+                    <li aria-current="page" class="active"><span class="step-number">2</span> <span class="step">Enter contact details</span></li>
+                    <li><span class="step-number">3</span> <span class="step">Request summary</span></li>
+                    <li><span class="step-number">4</span> <span class="step">Request receipt</span></li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <div class="heading">
+        <div class="row">
+            <div class="col-md-12">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="summary-error-message">
+                        <h2>There is a problem.</h2>
+                        <p>Check the highlighted responses below.</p>
+                    </div>
+                    @if (ViewData.ModelState["server-error"]?.Errors.Count() > 0)
+                    {
+                        <div class="summary-error-message">
+                            <p>There is a problem saving your request, please try again later.</p>
+                        </div>
+                    }
+                }
+                <h2>Your email address</h2>
+                <p>
+                    Provide your email address so that we can let you know the outcome of the search for evidence of naturalisation.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <form action="@Url.Action("ContactEmail", "Request")" method="post" novalidate>
+        <div class="reader-ticket-form">
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(Model => Model.SubjectFirstName)
+                    @Html.HiddenFor(Model => Model.SubjectLastName)
+                    @Html.HiddenFor(Model => Model.AlternativeFirstName)
+                    @Html.HiddenFor(Model => Model.AlternativeLastName)
+                    @Html.HiddenFor(Model => Model.DateOfBirth)
+                    @Html.HiddenFor(Model => Model.DateOfDeath)
+                    @Html.HiddenFor(Model => Model.CountryOfBirth)
+
+                    @Html.HiddenFor(Model => Model.ContactTitle)
+                    @Html.HiddenFor(Model => Model.ContactFirstName)
+                    @Html.HiddenFor(Model => Model.ContactLastName)
+                    @Html.HiddenFor(Model => Model.ContactAddress1)
+                    @Html.HiddenFor(Model => Model.ContactAddress2)
+                    @Html.HiddenFor(Model => Model.ContactCity)
+                    @Html.HiddenFor(Model => Model.ContactCounty)
+                    @Html.HiddenFor(Model => Model.ContactPostCode)
+                    @Html.HiddenFor(Model => Model.ContactCountry)
+                    @Html.HiddenFor(Model => Model.LetterToRequestor)
+
+                    @Html.HiddenFor(Model => Model.AgentCompanyName)
+                    @Html.HiddenFor(Model => Model.AgentFirstName)
+                    @Html.HiddenFor(Model => Model.AgentLastName)
+                    @Html.HiddenFor(Model => Model.AgentAddress1)
+                    @Html.HiddenFor(Model => Model.AgentAddress2)
+                    @Html.HiddenFor(Model => Model.AgentCity)
+                    @Html.HiddenFor(Model => Model.AgentCounty)
+                    @Html.HiddenFor(Model => Model.AgentPostCode)
+                    @Html.HiddenFor(Model => Model.AgentCountry)
+
+                    <fieldset>
+                        <legend class="mt-lg">Email address</legend>
+
+                        <div class="form-row">
+                            <label for="ContactEmail" class="sr-only">Email address</label>
+                            @if (ViewData.ModelState["ContactEmail"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactEmail, new { @class = "form-warning", placeholder = "Enter email address", required = true, aria_describedby = "validation-message-email" })
+                                @Html.ValidationMessageFor(Model => Model.ContactEmail, "", new { @class = "form-error", id = "validation-message-email" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactEmail, new { placeholder = "Enter email address", required = true })
+                            }
+                        </div>
+
+                        <div class="form-row">
+                            <label for="CompareEmail" class="sr-only">Please confirm your email address</label>
+                            @if (ViewData.ModelState["CompareEmail"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.CompareEmail, new { @class = "form-warning", placeholder = "Confirm email address", required = true, aria_describedby = "validation-message-compare-email" })
+                                @Html.ValidationMessageFor(Model => Model.CompareEmail, "", new { @class = "form-error", id = "validation-message-compare-email" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.CompareEmail, new { placeholder = "Confirm email address", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <div class="form-row">
+                        <span>
+                            The details you provide on this application form will appear on the letter of no evidence exactly as they have been entered in the above fields. Please ensure the details are correct before proceeding.
+                            We are unable to make amendments once a letter has been issued and a new request will need to be made.
+                        </span>
+                    </div>
+
+                    <div class="reservation-options">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="button secondary" name="submitbutton" value="previous">Previous</button>
+                                <button type="submit" class="button primary" name="submitbutton" value="next">Review the request</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

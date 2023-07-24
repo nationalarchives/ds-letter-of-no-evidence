@@ -3,7 +3,7 @@
     public class Request
     {
         public int Id { get; set; }
-        public string? RequestNumber { get; set; } //TNAZZZ
+        public string? RequestNumber { get; set; }
         public string? SubjectFirstName { get; set; }
         public string? SubjectLastName { get; set; }
         public string? AlternativeFirstName { get; set; }
@@ -21,7 +21,9 @@
         public string? ContactPostCode { get; set; }
         public string? ContactCountry { get; set;}
         public bool LetterToRequestor { get; set; }
-        public string? AgentFullName { get; set;}
+        public string? AgentCompanyName { get; set;}
+        public string? AgentFirstName { get; set; }
+        public string? AgentLastName { get; set; }
         public string? AgentAddress1 { get; set;}
         public string? AgentAddress2 { get;set;}
         public string? AgentCity { get; set;}
@@ -29,6 +31,6 @@
         public string? AgentPostCode { get;set;}
         public string? AgentCountry { get; set;}
         public string? ContactEmail { get; set; }
-        public List<Payment> Payments { get; set; } 
+        public List<Payment>? Payments { get; set; } 
     }
 }

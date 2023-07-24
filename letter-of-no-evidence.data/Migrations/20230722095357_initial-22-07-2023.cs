@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace letter_of_no_evidence.data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial17072023 : Migration
+    public partial class initial22072023 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,7 +35,7 @@ namespace letter_of_no_evidence.data.Migrations
                     SubjectLastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AlternativeFirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     AlternativeLastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    DateOfBirth = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    DateOfBirth = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     DateOfDeath = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     CountryOfBirth = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     ContactTitle = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
@@ -48,7 +48,9 @@ namespace letter_of_no_evidence.data.Migrations
                     ContactPostCode = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     ContactCountry = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LetterToRequestor = table.Column<bool>(type: "bit", nullable: false),
-                    AgentFullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    AgentCompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    AgentFirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    AgentLastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     AgentAddress1 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     AgentAddress2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     AgentCity = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),

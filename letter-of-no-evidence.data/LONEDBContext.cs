@@ -29,7 +29,7 @@ namespace letter_of_no_evidence.data
             modelBuilder.Entity<Request>().Property(e => e.SubjectLastName).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<Request>().Property(e => e.AlternativeFirstName).HasMaxLength(50);
             modelBuilder.Entity<Request>().Property(e => e.AlternativeLastName).HasMaxLength(50);
-            modelBuilder.Entity<Request>().Property(e => e.DateOfBirth).HasMaxLength(30);
+            modelBuilder.Entity<Request>().Property(e => e.DateOfBirth).IsRequired().HasMaxLength(30);
             modelBuilder.Entity<Request>().Property(e => e.DateOfDeath).HasMaxLength(30);
             modelBuilder.Entity<Request>().Property(e => e.CountryOfBirth).HasMaxLength(100);
             modelBuilder.Entity<Request>().Property(e => e.ContactTitle).HasMaxLength(30);
@@ -42,7 +42,9 @@ namespace letter_of_no_evidence.data
             modelBuilder.Entity<Request>().Property(e => e.ContactCounty).HasMaxLength(100);
             modelBuilder.Entity<Request>().Property(e => e.ContactPostCode).IsRequired().HasMaxLength(30);
             modelBuilder.Entity<Request>().Property(e => e.ContactCountry).IsRequired().HasMaxLength(100);
-            modelBuilder.Entity<Request>().Property(e => e.AgentFullName).HasMaxLength(100);
+            modelBuilder.Entity<Request>().Property(e => e.AgentCompanyName).HasMaxLength(100);
+            modelBuilder.Entity<Request>().Property(e => e.AgentFirstName).HasMaxLength(50);
+            modelBuilder.Entity<Request>().Property(e => e.AgentLastName).HasMaxLength(50);
             modelBuilder.Entity<Request>().Property(e => e.AgentAddress1).HasMaxLength(100);
             modelBuilder.Entity<Request>().Property(e => e.AgentAddress2).HasMaxLength(100);
             modelBuilder.Entity<Request>().Property(e => e.AgentCity).HasMaxLength(100);

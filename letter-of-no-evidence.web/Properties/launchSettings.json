@@ -13,7 +13,12 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "LONE_Root_Path": "/letter-of-no-evidence"
+        "LONE_Root_Path": "/letter-of-no-evidence",
+        "LONE_WebApi_URL": "https://localhost:7212/letter-of-no-evidence-api/",
+        "GOV_PAY_URL": "https://publicapi.payments.service.gov.uk/v1/payments/",
+        "GOV_PAY_API_KEY": "",
+        "LONE_Return_URL": "https://localhost:44369/letter-of-no-evidence/request-receipt/",
+        "LONE_Amount": "2715"
       }
     },
     "letter_of_no_evidence.web": {
@@ -23,7 +28,12 @@
       "applicationUrl": "https://localhost:7099;http://localhost:5298",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "LONE_Root_Path": "/letter-of-no-evidence"
+        "LONE_Root_Path": "/letter-of-no-evidence",
+        "LONE_WebApi_URL": "https://localhost:7212/letter-of-no-evidence-api/",
+        "GOV_PAY_URL": "https://publicapi.payments.service.gov.uk/v1/payments",
+        "GOV_PAY_API_KEY": "",
+        "Return_URL": "https://localhost:44369/letter-of-no-evidence/request-receipt/",
+        "Amount": "2715"
       }
     }
   }

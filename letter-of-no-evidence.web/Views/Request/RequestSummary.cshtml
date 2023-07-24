@@ -1,0 +1,217 @@
+﻿@model letter_of_no_evidence.web.Models.RequestViewModel
+
+@{
+    ViewData["Title"] = "Request summary - The National Archives";
+}
+
+@await Html.PartialAsync("Partials/_Breadcrumbs")
+
+<h1 class="display-4">3. Request summary</h1>
+
+<div class="container content-wrapper">
+
+    <div class="text-center">
+        <section class="row" id="progress-bar">
+            <h2 class="sr-only">Progress</h2>
+            <div class="col-md-12">
+                <ol>
+                    <li><span class="step-number">1</span> <span class="step">Enter subject details</span></li>
+                    <li><span class="step-number">2</span> <span class="step">Enter contact details</span></li>
+                    <li aria-current="page" class="active"><span class="step-number">3</span> <span class="step">Request summary</span></li>
+                    <li><span class="step-number">4</span> <span class="step">Request receipt</span></li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <div class="heading">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Please check the details in your application below.</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="booking-details">
+        <div class="row">
+            <div class="col-md-12">
+                <fieldset>
+                    <legend class="mt-lg">Personal details of the subject of the search</legend>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">First name(s)</th>
+                                <td>@Html.DisplayFor(model => model.SubjectFirstName)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Last name</th>
+                                <td>@Html.DisplayFor(model => model.SubjectLastName)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Alternative first name(s) (optional)</th>
+                                <td>@Html.DisplayFor(model => model.AlternativeFirstName)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Alternative last name(s) (optional)</th>
+                                <td>@Html.DisplayFor(model => model.AlternativeLastName)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Date of birth</th>
+                                <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Date of death (optional)</th>
+                                <td>@Html.DisplayFor(model => model.DateOfDeath)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Country of birth (optional)</th>
+                                <td>@Html.DisplayFor(model => model.CountryOfBirth)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+
+                <fieldset>
+                    <legend class="mt-lg">Who is this letter for?</legend>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Title (optional)</th>
+                                <td>@Html.DisplayFor(model => model.ContactTitle)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">First name(s) (optional)</th>
+                                <td>@Html.DisplayFor(model => model.ContactFirstName)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Last name</th>
+                                <td>@Html.DisplayFor(model => model.ContactLastName)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Address line 1</th>
+                                <td>@Html.DisplayFor(model => model.ContactAddress1)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Address line 2 (optional)</th>
+                                <td>@Html.DisplayFor(model => model.ContactAddress2)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Town or City</th>
+                                <td>@Html.DisplayFor(model => model.ContactCity)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">County (optional)</th>
+                                <td>@Html.DisplayFor(model => model.ContactCounty)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Postcode</th>
+                                <td>@Html.DisplayFor(model => model.ContactPostCode)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Country</th>
+                                <td>@Html.DisplayFor(model => model.ContactCountry)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="2" rowspan="3">
+                                    Are these the same details that the letter should be posted to?<br />
+                                    <p class="helper-text">
+                                        @Html.RadioButtonFor(model => model.LetterToRequestor, true, new { disabled = true }) Yes<br />
+                                        @Html.RadioButtonFor(model => model.LetterToRequestor, false, new { disabled = true }) No, I need the letter sent to a different address
+                                    </p>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+
+                @if (!Model.LetterToRequestor)
+                {
+                    <fieldset>
+                        <legend class="mt-lg">Who should we post the letter to?</legend>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Company name (optional)</th>
+                                    <td>@Html.DisplayFor(model => model.AgentCompanyName)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">First name(s) (optional)</th>
+                                    <td>@Html.DisplayFor(model => model.AgentFirstName)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Last name</th>
+                                    <td>@Html.DisplayFor(model => model.AgentLastName)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Address line 1</th>
+                                    <td>@Html.DisplayFor(model => model.AgentAddress1)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Address line 2 (optional)</th>
+                                    <td>@Html.DisplayFor(model => model.AgentAddress2)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Town or City</th>
+                                    <td>@Html.DisplayFor(model => model.AgentCity)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">County (optional)</th>
+                                    <td>@Html.DisplayFor(model => model.AgentCounty)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Postcode</th>
+                                    <td>@Html.DisplayFor(model => model.AgentPostCode)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Country</th>
+                                    <td>@Html.DisplayFor(model => model.AgentCountry)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                }
+
+                <fieldset>
+                    <legend class="mt-lg">Your email address</legend>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Email address</th>
+                                <td>@Html.DisplayFor(model => model.ContactEmail)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+
+                <div id="enter-your-details-timer">
+                    <p>
+                        If you are satisfied that the information you have entered above is correct, please <strong>Continue to payment.</strong>
+                    </p>
+                    <p>
+                        If you would like to amend the information on this application, please use the <strong>Previous</strong> option.
+                    </p>
+                </div>
+
+                <div id="enter-your-details-timer" class="full-width warning-panel">
+                    <p>
+                        Please note that once you have made payment, the information you have provided to us so far cannot be altered.
+                    </p>
+                    <p>
+                        Do not continue if the summary of the information does not match what you would like included in the letter.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="@Url.Action("RequestSummary", "Request")" method="post" novalidate>
+        @Html.AntiForgeryToken()
+        <div class="reservation-options">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="button secondary" name="submitbutton" value="previous">Previous</button>
+                    <button type="submit" class="button primary" name="submitbutton" value="next">Continue to payment</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

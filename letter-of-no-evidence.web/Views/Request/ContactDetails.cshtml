@@ -1,0 +1,218 @@
+﻿@model letter_of_no_evidence.web.Models.ContactDetailsViewModel
+
+@{
+    ViewData["Title"] = "Contact details - The National Archives";
+}
+
+@await Html.PartialAsync("Partials/_Breadcrumbs")
+
+<h1 class="display-4">2. Enter contact details</h1>
+
+<div class="container content-wrapper">
+
+    <div class="text-center">
+        <section class="row" id="progress-bar">
+            <h2 class="sr-only">Progress</h2>
+            <div class="col-md-12">
+                <ol>
+                    <li><span class="step-number">1</span> <span class="step">Enter subject details</span></li>
+                    <li aria-current="page" class="active"><span class="step-number">2</span> <span class="step">Enter contact details</span></li>
+                    <li><span class="step-number">3</span> <span class="step">Request summary</span></li>
+                    <li><span class="step-number">4</span> <span class="step">Request receipt</span></li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <div class="heading">
+        <div class="row">
+            <div class="col-md-12">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="summary-error-message">
+                        <h2>There is a problem.</h2>
+                        <p>Check the highlighted responses below.</p>
+                    </div>
+                }
+                <h2>Who is this letter for?</h2>
+                <p>
+                    If the letter is for yourself, enter your own details.<br />
+                    If the letter is for someone else, enter their details.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <form action="@Url.Action("ContactDetails", "Request")" method="post" novalidate>
+        <div class="reader-ticket-form">
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(Model => Model.SubjectFirstName)
+                    @Html.HiddenFor(Model => Model.SubjectLastName)
+                    @Html.HiddenFor(Model => Model.AlternativeFirstName)
+                    @Html.HiddenFor(Model => Model.AlternativeLastName)
+                    @Html.HiddenFor(Model => Model.DateOfBirth)
+                    @Html.HiddenFor(Model => Model.DateOfDeath)
+                    @Html.HiddenFor(Model => Model.CountryOfBirth)
+                    <fieldset>
+                        <legend class="mt-lg">Title (optional)</legend>
+
+                        <div class="form-row">
+                            <p class="helper-text">For example Mr, Mrs, Ms, Miss etc</p>
+
+                            <label for="ContactTitle" class="sr-only">Title (optional)</label>
+                            @Html.TextBoxFor(Model => Model.ContactTitle, new { placeholder = "Enter title" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">First name</legend>
+
+                        <div class="form-row">
+                            <label for="ContactFirstName" class="sr-only">First name</label>
+                            @Html.TextBoxFor(Model => Model.ContactFirstName, new { placeholder = "Enter first name" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Last name</legend>
+
+                        <div class="form-row">
+                            <label for="ContactLastName" class="sr-only">Last name</label>
+                            @if (ViewData.ModelState["ContactLastName"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactLastName, new { @class = "form-warning", placeholder = "Enter last name", required = true, aria_describedby = "validation-message-lastname" })
+                                @Html.ValidationMessageFor(Model => Model.ContactLastName, "", new { @class = "form-error", id = "validation-message-lastname" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactLastName, new { placeholder = "Enter last name", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Address line 1</legend>
+
+                        <div class="form-row">
+                            <label for="ContactAddress1" class="sr-only">Address line 1</label>
+                            @if (ViewData.ModelState["ContactAddress1"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactAddress1, new { @class = "form-warning", placeholder = "Enter address line 1", required = true, aria_describedby = "validation-message-address1" })
+                                @Html.ValidationMessageFor(Model => Model.ContactAddress1, "", new { @class = "form-error", id = "validation-message-address1" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactAddress1, new { placeholder = "Enter address line 1", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Address line 2 (optional)</legend>
+
+                        <div class="form-row">
+                            <label for="ContactAddress2" class="sr-only">Address line 2 (optional)</label>
+                            @Html.TextBoxFor(Model => Model.ContactAddress2, new { placeholder = "Enter address line 2" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Town or City</legend>
+
+                        <div class="form-row">
+                            <label for="ContactCity" class="sr-only">Town or City</label>
+                            @if (ViewData.ModelState["ContactCity"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactCity, new { @class = "form-warning", placeholder = "Enter town or city", required = true, aria_describedby = "validation-message-city" })
+                                @Html.ValidationMessageFor(Model => Model.ContactCity, "", new { @class = "form-error", id = "validation-message-city" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactCity, new { placeholder = "Enter town or city", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">County (optional)</legend>
+
+                        <div class="form-row">
+                            <label for="ContactCounty" class="sr-only">County (optional)</label>
+                            @Html.TextBoxFor(Model => Model.ContactCounty, new { placeholder = "Enter county" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Postcode</legend>
+
+                        <div class="form-row">
+                            <label for="ContactPostCode" class="sr-only">Postcode</label>
+                            @if (ViewData.ModelState["ContactPostCode"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactPostCode, new { @class = "form-warning", placeholder = "Enter postcode", required = true, aria_describedby = "validation-message-postcode" })
+                                @Html.ValidationMessageFor(Model => Model.ContactPostCode, "", new { @class = "form-error", id = "validation-message-postcode" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactPostCode, new { placeholder = "Enter postcode", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Country</legend>
+
+                        <div class="form-row">
+                            <label for="ContactCountry" class="sr-only">Country</label>
+                            @if (ViewData.ModelState["ContactCountry"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactCountry, new { @class = "form-warning", placeholder = "Enter country", required = true, aria_describedby = "validation-message-country" })
+                                @Html.ValidationMessageFor(Model => Model.ContactCountry, "", new { @class = "form-error", id = "validation-message-country" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.ContactCountry, new { placeholder = "Enter country", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <div id="enter-your-details-timer" class="full-width warning-panel">
+                        <span>
+                            The details you provide on this application form will appear on the letter of no evidence exactly as they have been entered in the above fields. Please ensure the details are correct before proceeding.
+                            We are unable to make amendments once a letter has been issued and a new request will need to be made.
+                        </span>
+                    </div>
+
+                    <fieldset>
+                        <legend class="mt-lg">&nbsp;</legend>
+
+                        <div class="form-row">
+                            <p class="helper-text">Are these the same details that the letter should be posted to?</p>
+
+                            @Html.RadioButtonFor(model => model.LetterToRequestor, true, new { id = "letter-to-requestor-yes", aria_describedby = "validation-message-letter-to-requestor" } ) Yes<br />
+                            @Html.RadioButtonFor(model => model.LetterToRequestor, false, new { id = "letter-to-requestor-no", aria_describedby = "validation-message-letter-to-requestor" }) No, I need the letter sent to a different address<br />
+
+                            @if (ViewData.ModelState["LetterToRequestor"]?.Errors.Count() > 0)
+                            {
+                                @Html.ValidationMessageFor(Model => Model.LetterToRequestor, "", new { @class = "form-error", id = "validation-message-letter-to-requestor" })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <div class="reservation-options">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="button secondary" name="submitbutton" value="previous">Previous</button>
+                                <button type="submit" class="button primary" name="submitbutton" value="next">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+

@@ -1,0 +1,72 @@
+﻿@model letter_of_no_evidence.web.Models.ReceiptViewModel
+
+@{
+    ViewData["Title"] = "Request receipt - The National Archives";
+}
+
+@await Html.PartialAsync("Partials/_Breadcrumbs")
+
+<h1 class="display-4">4. Request receipt</h1>
+
+<div class="container content-wrapper">
+
+    <div class="text-center">
+        <section class="row" id="progress-bar">
+            <h2 class="sr-only">Progress</h2>
+            <div class="col-md-12">
+                <ol>
+                    <li><span class="step-number">1</span> <span class="step">Enter subject details</span></li>
+                    <li><span class="step-number">2</span> <span class="step">Enter contact details</span></li>
+                    <li><span class="step-number">3</span> <span class="step">Request summary</span></li>
+                    <li aria-current="page" class="active"><span class="step-number">4</span> <span class="step">Request receipt</span></li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <div class="heading">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Request receipt</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="booking-details">
+        <div class="row">
+            <div class="col-md-12">
+                <fieldset>
+                    <legend class="mt-lg">Request payment details</legend>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">First name(s)</th>
+                                <td>@Html.DisplayFor(model => model.SubjectFirstName)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Last name</th>
+                                <td>@Html.DisplayFor(model => model.SubjectLastName)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Request number</th>
+                                <td>@Html.DisplayFor(model => model.RequestNumber)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Session id</th>
+                                <td>@Html.DisplayFor(model => model.SessionId)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Payment id</th>
+                                <td>@Html.DisplayFor(model => model.PaymentId)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Payment status</th>
+                                <td>@Html.DisplayFor(model => model.PaymentStatus)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

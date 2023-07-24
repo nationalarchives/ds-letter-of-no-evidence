@@ -1,0 +1,148 @@
+﻿@model letter_of_no_evidence.web.Models.SubjectDetailsViewModel
+
+@{
+    ViewData["Title"] = "Subject details - The National Archives";
+}
+
+@await Html.PartialAsync("Partials/_Breadcrumbs")
+
+<h1 class="display-4">1. Enter subject details</h1>
+
+<div class="container content-wrapper">
+
+    <div class="text-center">
+        <section class="row" id="progress-bar">
+            <h2 class="sr-only">Progress</h2>
+            <div class="col-md-12">
+                <ol>
+                    <li aria-current="page" class="active"><span class="step-number">1</span> <span class="step">Enter subject details</span></li>
+                    <li><span class="step-number">2</span> <span class="step">Enter contact details</span></li>
+                    <li><span class="step-number">3</span> <span class="step">Request summary</span></li>
+                    <li><span class="step-number">4</span> <span class="step">Request receipt</span></li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <div class="heading">
+        <div class="row">
+            <div class="col-md-12">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="summary-error-message">
+                        <h2>There is a problem.</h2>
+                        <p>Check the highlighted responses below.</p>
+                    </div>
+                }
+                <h2>Personal details of the subject of the search</h2>
+            </div>
+        </div>
+    </div>
+
+    <form action="@Url.Action("SubjectDetails", "Request")" method="post" novalidate>
+        <div class="reader-ticket-form">
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <legend class="mt-lg">First name</legend>
+
+                        <div class="form-row">
+                            <label for="SubjectFirstName" class="sr-only">First name</label>
+                            @if (ViewData.ModelState["SubjectFirstName"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.SubjectFirstName, new { @class = "form-warning", placeholder = "Enter first name", required = true, aria_describedby = "validation-message-firstname" })
+                                @Html.ValidationMessageFor(Model => Model.SubjectFirstName, "", new { @class = "form-error", id = "validation-message-firstname" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.SubjectFirstName, new { placeholder = "Enter first name", required = true })
+                            }
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="mt-lg">Last name</legend>
+
+                        <div class="form-row">
+                            <label for="SubjectLastName" class="sr-only">Last name</label>
+                            @if (ViewData.ModelState["SubjectLastName"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.SubjectLastName, new { @class = "form-warning", placeholder = "Enter last name", required = true, aria_describedby = "validation-message-lastname" })
+                                @Html.ValidationMessageFor(Model => Model.SubjectLastName, "", new { @class = "form-error", id = "validation-message-lastname" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.SubjectLastName, new { placeholder = "Enter last name", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Alternative first name(s) (optional)</legend>
+
+                        <div class="form-row">
+                            <p class="helper-text">For example, Anglicised names.</p>
+
+                            <label for="AlternativeFirstName" class="sr-only">Alternative first name(s) (optional)</label>
+                            @Html.TextBoxFor(Model => Model.AlternativeFirstName, new { placeholder = "Enter alternative first name" })
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="mt-lg">Alternative last name(s) (optional)</legend>
+
+                        <div class="form-row">
+                            <p class="helper-text">For example, married or maiden names.</p>
+
+                            <label for="AlternativeLastName" class="sr-only">Alternative last name(s) (optional)</label>
+                            @Html.TextBoxFor(Model => Model.AlternativeLastName, new { placeholder = "Enter alternative last name" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Date of birth</legend>
+
+                        <div class="form-row">
+                            <p class="helper-text">For example, 04/07/1901 or July 1901.</p>
+                            <p class="helper-text">If you don’t know the exact date, enter the approximate year.</p>
+
+                            <label for="DateOfBirth" class="sr-only">Date of birth</label>
+                            @if (ViewData.ModelState["DateOfBirth"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.DateOfBirth, new { @class = "form-warning", placeholder = "Enter date of birth", required = true, aria_describedby = "validation-message-dateofbirth" })
+                                @Html.ValidationMessageFor(Model => Model.DateOfBirth, "", new { @class = "form-error", id = "validation-message-dateofbirth" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.DateOfBirth, new { placeholder = "Enter date of birth", required = true })
+                            }
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="mt-lg">Date of death (optional)</legend>
+
+                        <div class="form-row">
+                            <p class="helper-text">For example, 04/07/1928 or July 1928.</p>
+                            <p class="helper-text">If you don’t know the exact date, enter the approximate year.</p>
+
+                            <label for="DateOfDeath" class="sr-only">Date of death (optional)</label>
+                            @Html.TextBoxFor(Model => Model.DateOfDeath, new { placeholder = "Enter date of death" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Country of birth (optional)</legend>
+
+                        <div class="form-row">
+                            <label for="CountryOfBirth" class="sr-only">Country of birth (optional)</label>
+                            @Html.TextBoxFor(Model => Model.CountryOfBirth, new { placeholder = "Enter country of birth" })
+                        </div>
+                    </fieldset>
+
+                    <div class="form-row">
+                        <button type="submit" class="button" name="submitbutton">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,6 +1,5 @@
 ﻿using letter_of_no_evidence.api.Service;
 using letter_of_no_evidence.model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace letter_of_no_evidence.api.Controllers
@@ -18,10 +17,25 @@ namespace letter_of_no_evidence.api.Controllers
             _logger = logger;
         }
 
-        [HttpGet("get")]
-        public async Task<ActionResult<RequestModel>> GetRequest(int id)
+        [HttpGet("getrequest/{requestNumber}")]
+        public async Task<ActionResult<RequestModel>> GetRequest(string requestNumber)
         {
-            throw new NotImplementedException();
+            var result = await _requestService.GetRequestByNumberAsync(requestNumber);
+            return Ok(result);
+        }
+
+        [HttpPut("create")]
+        public async Task<ActionResult<RequestResponseModel>> CreateBooking(RequestModel requestModel)
+        {
+            var result = await _requestService.CreateRequestAsync(requestModel);
+            return Ok(result);
+        }
+
+        [HttpPost("update")]
+        public async Task<ActionResult<RequestResponseModel>> UpdateBooking(RequestModel requestModel)
+        {
+            var result = await _requestService.UpdateRequestAsync(requestModel);
+            return Ok(result);
         }
     }
 }

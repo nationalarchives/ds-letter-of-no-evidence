@@ -1,5 +1,7 @@
 using letter_of_no_evidence.web.Helper;
+using letter_of_no_evidence.web.Service;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 
 namespace letter_of_no_evidence.web
 {
@@ -18,6 +20,25 @@ namespace letter_of_no_evidence.web
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.Name = "LONE.Session";
+                options.Cookie.IsEssential = true;
+            });
+
+            builder.Services.AddHttpClient<IPaymentService, PaymentService>(c =>
+            {
+                c.BaseAddress = new Uri(Environment.GetEnvironmentVariable("GOV_PAY_URL"));
+                c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Environment.GetEnvironmentVariable("GOV_PAY_API_KEY"));
+                c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+
+            builder.Services.AddHttpClient<IRequestService, RequestService>(c =>
+            {
+                c.BaseAddress = new Uri(Environment.GetEnvironmentVariable("LONE_WebApi_URL"));
+                c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -29,8 +50,9 @@ namespace letter_of_no_evidence.web
                 app.UseExceptionHandler("/error");
             }
 
+            app.UseSession();
             app.RegisterTNACookieConsent();
-            //app.UseSecurityHeaderMiddleware();
+            app.UseSecurityHeaderMiddleware();
             app.UseRouting();
 
             var rootPath = Environment.GetEnvironmentVariable("LONE_Root_Path");
@@ -51,6 +73,37 @@ namespace letter_of_no_evidence.web
                     name: "default",
                     pattern: "",
                     new { controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "subject-details",
+                    pattern: "subject-details",
+                    new { controller = "Request", action = "SubjectDetails" });
+
+                endpoints.MapControllerRoute(
+                    name: "contact-details",
+                    pattern: "contact-details",
+                    new { controller = "Request", action = "ContactDetails" });
+
+                endpoints.MapControllerRoute(
+                    name: "postal-details",
+                    pattern: "postal-details",
+                    new { controller = "Request", action = "PostalDetails" });
+
+                endpoints.MapControllerRoute(
+                    name: "contact-email",
+                    pattern: "contact-email",
+                    new { controller = "Request", action = "ContactEmail" });
+
+                endpoints.MapControllerRoute(
+                    name: "request-summary",
+                    pattern: "request-summary",
+                    new { controller = "Request", action = "RequestSummary" });
+
+                endpoints.MapControllerRoute(
+                    name: "request-receipt",
+                    pattern: "request-receipt/{requestNumber}",
+                    new { controller = "Request", action = "RequestReceipt" });
+
             });
 
             app.Run();

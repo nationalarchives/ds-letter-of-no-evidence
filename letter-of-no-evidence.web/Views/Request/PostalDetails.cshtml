@@ -1,0 +1,203 @@
+﻿@model letter_of_no_evidence.web.Models.AgentDetailsViewModel
+
+
+@{
+    ViewData["Title"] = "Contact details - The National Archives";
+}
+
+@await Html.PartialAsync("Partials/_Breadcrumbs")
+
+<h1 class="display-4">2. Enter contact details</h1>
+
+<div class="container content-wrapper">
+
+    <div class="text-center">
+        <section class="row" id="progress-bar">
+            <h2 class="sr-only">Progress</h2>
+            <div class="col-md-12">
+                <ol>
+                    <li><span class="step-number">1</span> <span class="step">Enter subject details</span></li>
+                    <li aria-current="page" class="active"><span class="step-number">2</span> <span class="step">Enter contact details</span></li>
+                    <li><span class="step-number">3</span> <span class="step">Request summary</span></li>
+                    <li><span class="step-number">4</span> <span class="step">Request receipt</span></li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <div class="heading">
+        <div class="row">
+            <div class="col-md-12">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="summary-error-message">
+                        <h2>There is a problem.</h2>
+                        <p>Check the highlighted responses below.</p>
+                    </div>
+                }
+                <h2>Who should we post the letter to?</h2>
+            </div>
+        </div>
+    </div>
+
+    <form action="@Url.Action("PostalDetails", "Request")" method="post" novalidate>
+        <div class="reader-ticket-form">
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(Model => Model.SubjectFirstName)
+                    @Html.HiddenFor(Model => Model.SubjectLastName)
+                    @Html.HiddenFor(Model => Model.AlternativeFirstName)
+                    @Html.HiddenFor(Model => Model.AlternativeLastName)
+                    @Html.HiddenFor(Model => Model.DateOfBirth)
+                    @Html.HiddenFor(Model => Model.DateOfDeath)
+                    @Html.HiddenFor(Model => Model.CountryOfBirth)
+
+                    @Html.HiddenFor(Model => Model.ContactTitle)
+                    @Html.HiddenFor(Model => Model.ContactFirstName)
+                    @Html.HiddenFor(Model => Model.ContactLastName)
+                    @Html.HiddenFor(Model => Model.ContactAddress1)
+                    @Html.HiddenFor(Model => Model.ContactAddress2)
+                    @Html.HiddenFor(Model => Model.ContactCity)
+                    @Html.HiddenFor(Model => Model.ContactCounty)
+                    @Html.HiddenFor(Model => Model.ContactPostCode)
+                    @Html.HiddenFor(Model => Model.ContactCountry)
+                    @Html.HiddenFor(Model => Model.LetterToRequestor)
+
+                    <fieldset>
+                        <legend class="mt-lg">Company name (optional)</legend>
+
+                        <div class="form-row">
+                            <label for="AgentCompanyName" class="sr-only">Company name (optional)</label>
+                            @Html.TextBoxFor(Model => Model.AgentCompanyName, new { placeholder = "Enter company name" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">First name(s) (optional)</legend>
+
+                        <div class="form-row">
+                            <label for="AgentFirstName" class="sr-only">First name(s) (optional)</label>
+                            @Html.TextBoxFor(Model => Model.AgentFirstName, new { placeholder = "Enter first name" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Last name</legend>
+
+                        <div class="form-row">
+                            <label for="AgentLastName" class="sr-only">Full name (optional)</label>
+                            @if (ViewData.ModelState["AgentLastName"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentLastName, new { @class = "form-warning", placeholder = "Enter last name", required = true, aria_describedby = "validation-message-lastname" })
+                                @Html.ValidationMessageFor(Model => Model.AgentLastName, "", new { @class = "form-error", id = "validation-message-lastname" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentLastName, new { placeholder = "Enter last name", required = true })
+                            }
+
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Address line 1</legend>
+
+                        <div class="form-row">
+                            <label for="AgentAddress1" class="sr-only">Address line 1</label>
+                            @if (ViewData.ModelState["AgentAddress1"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentAddress1, new { @class = "form-warning", placeholder = "Enter address line 1", required = true, aria_describedby = "validation-message-address1" })
+                                @Html.ValidationMessageFor(Model => Model.AgentAddress1, "", new { @class = "form-error", id = "validation-message-address1" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentAddress1, new { placeholder = "Enter address line 1", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Address line 2 (optional)</legend>
+
+                        <div class="form-row">
+                            <label for="AgentAddress2" class="sr-only">Address line 2 (optional)</label>
+                            @Html.TextBoxFor(Model => Model.AgentAddress2, new { placeholder = "Enter address line 2" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Town or City</legend>
+
+                        <div class="form-row">
+                            <label for="AgentCity" class="sr-only">Town or City</label>
+                            @if (ViewData.ModelState["AgentCity"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentCity, new { @class = "form-warning", placeholder = "Enter town or city", required = true, aria_describedby = "validation-message-city" })
+                                @Html.ValidationMessageFor(Model => Model.AgentCity, "", new { @class = "form-error", id = "validation-message-city" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentCity, new { placeholder = "Enter town or city", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">County (optional)</legend>
+
+                        <div class="form-row">
+                            <label for="AgentCounty" class="sr-only">County (optional)</label>
+                            @Html.TextBoxFor(Model => Model.AgentCounty, new { placeholder = "Enter county" })
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Postcode</legend>
+
+                        <div class="form-row">
+                            <label for="AgentPostCode" class="sr-only">Postcode</label>
+                            @if (ViewData.ModelState["AgentPostCode"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentPostCode, new { @class = "form-warning", placeholder = "Enter postcode", required = true, aria_describedby = "validation-message-postcode" })
+                                @Html.ValidationMessageFor(Model => Model.AgentPostCode, "", new { @class = "form-error", id = "validation-message-postcode" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentPostCode, new { placeholder = "Enter postcode", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="mt-lg">Country</legend>
+
+                        <div class="form-row">
+                            <label for="AgentCountry" class="sr-only">Country</label>
+                            @if (ViewData.ModelState["AgentCountry"]?.Errors.Count() > 0)
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentCountry, new { @class = "form-warning", placeholder = "Enter country", required = true, aria_describedby = "validation-message-country" })
+                                @Html.ValidationMessageFor(Model => Model.AgentCountry, "", new { @class = "form-error", id = "validation-message-country" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(Model => Model.AgentCountry, new { placeholder = "Enter country", required = true })
+                            }
+                        </div>
+                    </fieldset>
+
+                    <div class="reservation-options">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="button secondary" name="submitbutton" value="previous">Previous</button>
+                                <button type="submit" class="button primary" name="submitbutton" value="next">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+

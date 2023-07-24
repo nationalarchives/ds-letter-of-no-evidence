@@ -104,6 +104,10 @@ namespace letter_of_no_evidence.data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("AgentCompanyName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("AgentCountry")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -112,9 +116,13 @@ namespace letter_of_no_evidence.data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("AgentFullName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<string>("AgentFirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("AgentLastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("AgentPostCode")
                         .HasMaxLength(30)
@@ -179,6 +187,7 @@ namespace letter_of_no_evidence.data.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DateOfBirth")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
