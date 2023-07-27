@@ -11,6 +11,7 @@
         public string payment_provider { get; set; }
         public DateTime created_date { get; set; }
         public RefundSummary refund_summary { get; set; }
+        public SettlementSummary settlement_summary { get; set; }
         public bool delayed_capture { get; set; }
         public bool moto { get; set; }
         public string return_url { get; set; }
@@ -81,5 +82,12 @@
     {
         public string status { get; set; }
         public bool finished { get; set; }
+    }
+
+    public class SettlementSummary
+    {
+        public string capture_submit_time { get; set; }
+        public string captured_date { get; set; }
+        public string settled_date { get; set; }
     }
 }

@@ -28,6 +28,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Request receipt</h2>
+                <p>Your payment was successfully received.</p>
             </div>
         </div>
     </div>
@@ -36,28 +37,20 @@
         <div class="row">
             <div class="col-md-12">
                 <fieldset>
-                    <legend class="mt-lg">Request payment details</legend>
+                    <legend class="mt-lg">Your payment summary</legend>
                     <table class="table">
                         <tbody>
                             <tr>
-                                <th scope="row">First name(s)</th>
-                                <td>@Html.DisplayFor(model => model.SubjectFirstName)</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Last name</th>
-                                <td>@Html.DisplayFor(model => model.SubjectLastName)</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Request number</th>
+                                <th scope="row">Enquiry reference number</th>
                                 <td>@Html.DisplayFor(model => model.RequestNumber)</td>
                             </tr>
                             <tr>
-                                <th scope="row">Session id</th>
+                                <th scope="row">Transaction reference</th>
                                 <td>@Html.DisplayFor(model => model.SessionId)</td>
                             </tr>
                             <tr>
-                                <th scope="row">Payment id</th>
-                                <td>@Html.DisplayFor(model => model.PaymentId)</td>
+                                <th scope="row">Amount received</th>
+                                <td>@Html.DisplayFor(model => model.Amount) GBP (no VAT added)</td>
                             </tr>
                             <tr>
                                 <th scope="row">Payment status</th>

@@ -1,3 +1,4 @@
+using Amazon.Extensions.NETCore.Setup;
 using letter_of_no_evidence.api.Service;
 using letter_of_no_evidence.data;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,12 @@ namespace letter_of_no_evidence.api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Get the AWS profile information from configuration providers
+            AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
+            // Configure AWS service clients to use these credentials
+            builder.Services.AddDefaultAWSOptions(awsOptions);
+            builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-API/DataProtection");
 
             builder.Services.AddDbContext<LONEDBContext>(opt =>
                      opt.UseSqlServer(Environment.GetEnvironmentVariable("LONEConnection"))

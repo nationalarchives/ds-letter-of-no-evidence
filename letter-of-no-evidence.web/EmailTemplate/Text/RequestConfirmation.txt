@@ -1,0 +1,11 @@
+﻿    Dear {ContactFirstName} {ContactLastName},
+
+    Your payment was successfully received.
+
+    Your payment summary
+    Enquiry reference number:  {RequestNumber}
+    Transaction reference:     {SessionId}
+    Amount received:           {Amount} GBP (no VAT added)
+    Date received:             {CreatedDate}
+
+    This email address is not monitored. If you have any questions about your request for confirmation of no evidence of British naturalisation, contact ceerequests@nationalarchives.gov.uk.

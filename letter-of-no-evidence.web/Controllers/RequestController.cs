@@ -12,11 +12,13 @@ namespace letter_of_no_evidence.web.Controllers
     {
         private readonly IRequestService _requestService;
         private readonly IPaymentService _paymentService;
+        private readonly IEmailService _emailService;
 
-        public RequestController(IRequestService requestService, IPaymentService paymentService)
+        public RequestController(IRequestService requestService, IPaymentService paymentService, IEmailService emailService)
         {
             _requestService = requestService;
             _paymentService = paymentService;
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -161,7 +163,7 @@ namespace letter_of_no_evidence.web.Controllers
                     RequestId = response.RequestId,
                     SessionId = paymentResponse.reference,
                     PaymentId = paymentResponse.payment_id,
-                    Amount = paymentResponse.amount / 100,
+                    Amount = Decimal.Divide(paymentResponse.amount, 100),
                     PaymentStatus = paymentResponse.state.status.ToPaymentStatus(),
                     ProcessFinished = paymentResponse.state.finished,
                     TransactionDate = DateTime.Now
@@ -179,18 +181,34 @@ namespace letter_of_no_evidence.web.Controllers
             var response = await _requestService.GetRequestAsync(requestNumber);
             if (response != null)
             {
+                var paymentId = response.Payments?.FirstOrDefault()?.PaymentId;
+                var paymentResponse = await _paymentService.GetPaymentById(paymentId);
+
+                var paymentModel = new PaymentModel
+                {
+                    RequestId = response.Id,
+                    SessionId = paymentResponse.reference,
+                    PaymentId = paymentResponse.payment_id,
+                    Amount = Decimal.Divide(paymentResponse.amount, 100),
+                    PaymentStatus = paymentResponse.state.status.ToPaymentStatus(),
+                    ProcessFinished = paymentResponse.state.finished,
+                    TransactionDate = DateTime.Now
+                };
+
+                await _requestService.AddNewPaymentAsync(paymentModel);
+
+                await _emailService.SendCustomerEmailAsync(response);
+
+                await _emailService.SendD365EmailAsync(response);
+
                 var model = new ReceiptViewModel
                 {
                     RequestNumber = requestNumber,
-                    SubjectFirstName = response.SubjectFirstName,
-                    SubjectLastName = response.SubjectLastName,
-                    PaymentId = response.Payments?.FirstOrDefault()?.PaymentId,
-                    SessionId = response.Payments?.FirstOrDefault()?.SessionId
+                    PaymentStatus = paymentModel.PaymentStatus,
+                    Amount = paymentModel.Amount,
+                    SessionId = paymentResponse.reference
                 };
 
-                var paymentResponse = await _paymentService.GetPaymentById(model.PaymentId);
-
-                model.PaymentStatus = paymentResponse.state.status.ToPaymentStatus();
                 return View(model);
             }
             return NotFound();

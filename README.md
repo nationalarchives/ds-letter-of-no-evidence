@@ -33,4 +33,4 @@ Download and install:
 
 ### Entity relationship diagram
 
-![Letter of no evidence system](https://github.com/nationalarchives/ds-letter-of-no-evidence/assets/40386980/11141264-fbaf-4ddd-87ac-c24cc40d0296)
+![Letter of no evidence system](https://github.com/nationalarchives/ds-letter-of-no-evidence/assets/40386980/35f8abb0-4627-45de-abc3-25d2d9d9f36a)

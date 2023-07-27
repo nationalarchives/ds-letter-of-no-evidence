@@ -1,3 +1,5 @@
+using Amazon.Extensions.NETCore.Setup;
+using Amazon.SimpleEmail;
 using letter_of_no_evidence.web.Helper;
 using letter_of_no_evidence.web.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +16,16 @@ namespace letter_of_no_evidence.web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddControllers();
+
+            // Get the AWS profile information from configuration providers
+            AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
+            // Configure AWS service clients to use these credentials
+            builder.Services.AddDefaultAWSOptions(awsOptions);
+            builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-WEB/DataProtection");
+            builder.Services.AddAWSService<IAmazonSimpleEmailService>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
 
             builder.Services.AddMvc(options =>
             {
