@@ -17,7 +17,7 @@
 
       <p>
         Enquiry reference number: <xsl:value-of select="RequestNumber" /><br/>
-        Transaction reference: <xsl:value-of select="SessionId" /><br/>
+        Payment reference: <xsl:value-of select="SessionId" /><br/>
         Amount received: <xsl:value-of select="Amount" /> GBP (no VAT added)<br/>
         Date received: <xsl:value-of select="CreatedDate" />
       </p>

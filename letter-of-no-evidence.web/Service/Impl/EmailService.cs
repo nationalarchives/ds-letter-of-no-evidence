@@ -24,7 +24,7 @@ namespace letter_of_no_evidence.web.Service
         {
             var payment = requestModel.Payments?.FirstOrDefault();
             var fromAddress = _configuration.GetValue<string>("EmailSettings:EmailFrom");
-            var subject = $"{_configuration.GetValue<string>("EmailSettings:EmailSubject")}{payment.SessionId})";
+            var subject = $"{_configuration.GetValue<string>("EmailSettings:EmailSubject")}{requestModel.RequestNumber}";
 
             var rootElement = new XElement("Root");
             rootElement.Add(new XElement("ContactFirstName", requestModel.ContactFirstName));

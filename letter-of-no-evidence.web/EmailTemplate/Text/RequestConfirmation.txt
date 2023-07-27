@@ -4,7 +4,7 @@
 
     Your payment summary
     Enquiry reference number:  {RequestNumber}
-    Transaction reference:     {SessionId}
+    Payment reference:         {SessionId}
     Amount received:           {Amount} GBP (no VAT added)
     Date received:             {CreatedDate}
 
