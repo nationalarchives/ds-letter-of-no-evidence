@@ -1,0 +1,27 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS base
+RUN apk add icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+WORKDIR /app
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://*:8080
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
+WORKDIR /src
+COPY ["letter-of-no-evidence.api/letter-of-no-evidence.api.csproj", "letter-of-no-evidence.api/"]
+COPY ["letter-of-no-evidence.data/letter-of-no-evidence.data.csproj", "letter-of-no-evidence.data/"]
+COPY ["letter-of-no-evidence.domain/letter-of-no-evidence.domain.csproj", "letter-of-no-evidence.domain/"]
+COPY ["letter-of-no-evidence.model/letter-of-no-evidence.model.csproj", "letter-of-no-evidence.model/"]
+RUN dotnet restore "letter-of-no-evidence.api/letter-of-no-evidence.api.csproj"
+COPY . .
+WORKDIR "/src/letter-of-no-evidence.api"
+RUN dotnet build "letter-of-no-evidence.api.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "letter-of-no-evidence.api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+RUN addgroup -g 965 -S appuser && adduser -u 975 -S -D -h /app appuser appuser
+USER appuser
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "letter-of-no-evidence.api.dll"]
