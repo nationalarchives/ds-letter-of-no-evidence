@@ -19,7 +19,6 @@ namespace letter_of_no_evidence.api
 
             builder.Services.AddDbContext<LONEDBContext>(opt =>
                      opt.UseSqlServer(Environment.GetEnvironmentVariable("LONEConnection"))
-                     //opt.UseSqlServer(@"Data Source= (localdb)\MSSQLLocalDB; Initial Catalog=letter-of-no-evidence")
                         .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
             // Add services to the container.

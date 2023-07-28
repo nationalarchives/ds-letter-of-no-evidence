@@ -1,0 +1,8 @@
+INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (1, 'created','Payment created using the API. Your user has not yet visited next_url.')
+INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (2, 'started','Your user has visited next_url and is entering their payment details.')
+INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (3, 'submitted','Your user submitted payment details and went through authentication, if it was required.')
+INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (4, 'capturable','The payment is a delayed capture and your user has submitted their payment details and selected Confirm.')
+INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (5, 'success','Your user successfully completed the payment by selecting Confirm.')
+INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (6, 'failed','The payment failed. This failure could be because the payment timed out after 90 minutes, the user’s payment method was rejected, or your user cancelled the payment.')
+INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (7, 'cancelled','Your service cancelled the payment using an API call or the GOV.UK Pay admin tool.')
+INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (8, 'error','Something went wrong with GOV.UK Pay or the underlying payment service provider. The payment failed safely with no money taken from the user.')

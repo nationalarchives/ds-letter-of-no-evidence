@@ -197,9 +197,12 @@ namespace letter_of_no_evidence.web.Controllers
 
                 await _requestService.AddNewPaymentAsync(paymentModel);
 
-                await _emailService.SendCustomerEmailAsync(response);
+                if (paymentModel.PaymentStatus == PaymentStatus.Success)
+                {
+                    await _emailService.SendCustomerEmailAsync(response);
 
-                await _emailService.SendD365EmailAsync(response);
+                    await _emailService.SendD365EmailAsync(response);
+                }
 
                 var model = new ReceiptViewModel
                 {

@@ -17,6 +17,12 @@ namespace letter_of_no_evidence.api.Controllers
             _logger = logger;
         }
 
+        [HttpGet("ping")]
+        public async Task<ActionResult> Ping()
+        {
+            return Ok("API is up and running!!!");
+        }
+
         [HttpGet("getrequest/{requestNumber}")]
         public async Task<ActionResult<RequestModel>> GetRequest(string requestNumber)
         {

@@ -28,7 +28,17 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Request receipt</h2>
-                <p>Your payment was successfully received.</p>
+                @if (Model.PaymentStatus == model.PaymentStatus.Success)
+                {
+                    <p>Your payment was successfully received.</p>
+                }
+                else
+                {
+                    <div class="summary-error-message">
+                        <h2>There is a problem.</h2>
+                        <p>Your payment was un-successful, please try again.</p>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -36,29 +46,28 @@
     <div class="booking-details">
         <div class="row">
             <div class="col-md-12">
-                <fieldset>
-                    <legend class="mt-lg">Your payment summary</legend>
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <th scope="row">Enquiry reference number</th>
-                                <td>@Html.DisplayFor(model => model.RequestNumber)</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Payment reference</th>
-                                <td>@Html.DisplayFor(model => model.SessionId)</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Amount received</th>
-                                <td>@Html.DisplayFor(model => model.Amount) GBP (no VAT added)</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Payment status</th>
-                                <td>@Html.DisplayFor(model => model.PaymentStatus)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </fieldset>
+                @if (Model.PaymentStatus == model.PaymentStatus.Success)
+                {
+                    <fieldset>
+                        <legend class="mt-lg">Your payment summary</legend>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Enquiry reference number</th>
+                                    <td>@Html.DisplayFor(model => model.RequestNumber)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Payment reference</th>
+                                    <td>@Html.DisplayFor(model => model.SessionId)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Amount received</th>
+                                    <td>@Html.DisplayFor(model => model.Amount) GBP (no VAT added)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                }
             </div>
         </div>
     </div>
