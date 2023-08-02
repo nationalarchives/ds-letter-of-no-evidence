@@ -1,4 +1,4 @@
-﻿    Dear {ContactFirstName} {ContactLastName},
+﻿    Dear {ContactullName},
 
     Your payment was successfully received.
 

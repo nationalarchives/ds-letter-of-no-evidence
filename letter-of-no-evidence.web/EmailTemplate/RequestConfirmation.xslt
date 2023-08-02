@@ -6,7 +6,7 @@
   <xsl:template match="Root">
     <body style="font-family: Open Sans;font-size: 16px;line-height: 24px;">
       <p>
-        Dear <xsl:value-of select="ContactFirstName" /> <xsl:value-of select="ContactLastName" />,
+        Dear <xsl:value-of select="ContactullName" />,
       </p>
 
       <p>

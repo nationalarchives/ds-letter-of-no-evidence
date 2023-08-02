@@ -1,10 +1,8 @@
-﻿using Amazon.SimpleSystemsManagement.Model;
-using letter_of_no_evidence.model;
+﻿using letter_of_no_evidence.model;
 using letter_of_no_evidence.web.Helper;
 using letter_of_no_evidence.web.Models;
 using letter_of_no_evidence.web.Service;
 using Microsoft.AspNetCore.Mvc;
-using System.ServiceModel;
 
 namespace letter_of_no_evidence.web.Controllers
 {
@@ -140,38 +138,10 @@ namespace letter_of_no_evidence.web.Controllers
             var response = await _requestService.CreateRequestAsync(requestModel);
             if (response.IsSuccess)
             {
+                requestModel.Id = response.RequestId;
                 HttpContext.Session.RemoveObject("RequestFormDetails");
 
-                var amount = int.Parse(Environment.GetEnvironmentVariable("LONE_Amount"));
-                var sessionId = IdGenerator.GenerateSessionId(response.RequestId);
-                var returnURL = $"{Environment.GetEnvironmentVariable("LONE_Return_URL")}{model.RequestNumber}";
-
-                var paymentRequest = new PaymentRequestModel
-                {
-                    amount = amount,
-                    reference = sessionId,
-                    return_url = returnURL,
-                    description = $"Letter of no evidence search request - {model.RequestNumber}",
-                    email = model.ContactEmail,
-                    language = "en"
-                };
-
-                var paymentResponse = await _paymentService.CreateNewPayment(paymentRequest);
-
-                var paymentModel = new PaymentModel
-                {
-                    RequestId = response.RequestId,
-                    SessionId = paymentResponse.reference,
-                    PaymentId = paymentResponse.payment_id,
-                    Amount = Decimal.Divide(paymentResponse.amount, 100),
-                    PaymentStatus = paymentResponse.state.status.ToPaymentStatus(),
-                    ProcessFinished = paymentResponse.state.finished,
-                    TransactionDate = DateTime.Now
-                };
-
-                await _requestService.AddNewPaymentAsync(paymentModel);
-
-                return Redirect(paymentResponse._links.next_url.href);
+                return await CreatePayment(requestModel);
             }
             return View(model);
         }
@@ -181,7 +151,7 @@ namespace letter_of_no_evidence.web.Controllers
             var response = await _requestService.GetRequestAsync(requestNumber);
             if (response != null)
             {
-                var paymentId = response.Payments?.FirstOrDefault()?.PaymentId;
+                var paymentId = response.Payments?.OrderByDescending(x => x.Id)?.FirstOrDefault()?.PaymentId;
                 var paymentResponse = await _paymentService.GetPaymentById(paymentId);
 
                 var paymentModel = new PaymentModel
@@ -215,6 +185,56 @@ namespace letter_of_no_evidence.web.Controllers
                 return View(model);
             }
             return NotFound();
+        }
+
+        public async Task<IActionResult> TryAgain(string requestNumber)
+        {
+            var response = await _requestService.GetRequestAsync(requestNumber);
+            if (response != null)
+            {
+                return await CreatePayment(response);
+            }
+            return NotFound();
+        }
+
+        private async Task<IActionResult> CreatePayment(RequestModel model)
+        {
+            var retryCount = model.Payments?.Count ?? 0;
+            var amount = int.Parse(Environment.GetEnvironmentVariable("LONE_Amount"));
+            var sessionId = IdGenerator.GenerateSessionId(model.Id);
+            var returnURL = $"{Environment.GetEnvironmentVariable("LONE_Return_URL")}{model.RequestNumber}";
+
+            if (retryCount > 0)
+            {
+                sessionId = $"{sessionId}_{retryCount - 1}";
+            }
+
+            var paymentRequest = new PaymentRequestModel
+            {
+                amount = amount,
+                reference = sessionId,
+                return_url = returnURL,
+                description = $"Letter of no evidence search request - {model.RequestNumber}",
+                email = model.ContactEmail,
+                language = "en"
+            };
+
+            var paymentResponse = await _paymentService.CreateNewPayment(paymentRequest);
+
+            var paymentModel = new PaymentModel
+            {
+                RequestId = model.Id,
+                SessionId = paymentResponse.reference,
+                PaymentId = paymentResponse.payment_id,
+                Amount = Decimal.Divide(paymentResponse.amount, 100),
+                PaymentStatus = paymentResponse.state.status.ToPaymentStatus(),
+                ProcessFinished = paymentResponse.state.finished,
+                TransactionDate = DateTime.Now
+            };
+
+            await _requestService.AddNewPaymentAsync(paymentModel);
+
+            return Redirect(paymentResponse._links.next_url.href);
         }
     }
 }

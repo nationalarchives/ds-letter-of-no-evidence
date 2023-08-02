@@ -26,8 +26,7 @@ namespace letter_of_no_evidence.web.Models
         public string contact_postcode { get; set; }
         public string contact_country { get; set; }
         public string? agent_companyname { get; set; }
-        public string? agent_firstname { get; set; }
-        public string? agent_lastname { get; set; }
+        public string? agent_fullname { get; set; }
         public string? agent_address1 { get; set; }
         public string? agent_address2 { get; set; }
         public string? agent_town_city { get; set; }

@@ -116,6 +116,11 @@ namespace letter_of_no_evidence.web
                     pattern: "request-receipt/{requestNumber}",
                     new { controller = "Request", action = "RequestReceipt" });
 
+                endpoints.MapControllerRoute(
+                    name: "try-again",
+                    pattern: "try-again/{requestNumber}",
+                    new { controller = "Request", action = "TryAgain" });
+
             });
 
             app.Run();

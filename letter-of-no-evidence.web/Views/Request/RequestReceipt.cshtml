@@ -68,6 +68,17 @@
                         </table>
                     </fieldset>
                 }
+                else
+                {
+                    <fieldset>
+                        <legend class="mt-lg">Try again the payment</legend>
+
+                        <div class="form-row">
+                            <a class="button secondary" href="@Url.Action("Index", "Home")">Start again</a>
+                            <a class="button primary" href="@Url.Action("TryAgain", "Request", new { requestNumber = Model.RequestNumber })">Continue to payment</a>
+                        </div>
+                    </fieldset>
+                }
             </div>
         </div>
     </div>

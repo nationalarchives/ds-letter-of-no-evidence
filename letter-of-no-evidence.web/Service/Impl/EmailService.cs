@@ -27,8 +27,7 @@ namespace letter_of_no_evidence.web.Service
             var subject = $"{_configuration.GetValue<string>("EmailSettings:EmailSubject")}{requestModel.RequestNumber}";
 
             var rootElement = new XElement("Root");
-            rootElement.Add(new XElement("ContactFirstName", requestModel.ContactFirstName));
-            rootElement.Add(new XElement("ContactLastName", requestModel.ContactLastName));
+            rootElement.Add(new XElement("ContactullName", $"{requestModel.ContactFirstName} {requestModel.ContactLastName}"));
             rootElement.Add(new XElement("RequestNumber", requestModel.RequestNumber));
             rootElement.Add(new XElement("SessionId", payment.SessionId));
             rootElement.Add(new XElement("Amount", payment.Amount));
@@ -40,8 +39,7 @@ namespace letter_of_no_evidence.web.Service
 
             var sb = new StringBuilder(File.ReadAllText(@"EmailTemplate/Text/RequestConfirmation.txt"));
 
-            sb = sb.Replace("{ContactFirstName}", requestModel.ContactFirstName);
-            sb = sb.Replace("{ContactLastName}", requestModel.ContactLastName);
+            sb = sb.Replace("{ContactullName}", $"{requestModel.ContactFirstName} {requestModel.ContactLastName}");
             sb = sb.Replace("{RequestNumber}", requestModel.RequestNumber);
             sb = sb.Replace("{SessionId}", payment.SessionId);
             sb = sb.Replace("{Amount}", payment.Amount.ToString());
@@ -108,8 +106,7 @@ namespace letter_of_no_evidence.web.Service
                 contact_postcode = requestModel.ContactPostCode,
                 contact_country = requestModel.ContactCountry,
                 agent_companyname = requestModel.AgentCompanyName,
-                agent_firstname = requestModel.AgentFirstName,
-                agent_lastname = requestModel.AgentLastName,
+                agent_fullname = $"{requestModel.AgentFirstName} {requestModel.AgentLastName}",
                 agent_address1 = requestModel.AgentAddress1,
                 agent_address2 = requestModel.AgentAddress2,
                 agent_town_city = requestModel.AgentCity,
