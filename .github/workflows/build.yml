@@ -32,7 +32,6 @@ jobs:
     environment: inter-site 
     env:
       AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}            
-      STAGE: ${{ github.event.inputs.deploy-environment }}    
 
     if: github.ref == 'refs/heads/main'
     steps:
