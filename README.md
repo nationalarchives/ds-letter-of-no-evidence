@@ -19,10 +19,10 @@ Download and install:
 	I.   Open the Nuget package manager console on Visual Studio 2022 Professional
 		 ![Package manager console](https://github.com/nationalarchives/ds-letter-of-no-evidence/assets/40386980/deafb43c-9b61-4856-97f6-5ebd46447e25)
 	
-	II.  If you don't have migration script then run 
+	II.  If you don't have migration script then run (required only if you made any changes to the data model)
 		  `Add-Migration <any name for the script Eg: Initial-17-07-2023>` 
 	
-	III. To create the database from migration script run 
+	III. To create the database from migration script run (make sure letter-of-no-evidence.api is the start-up project and override the DB connection string in letter-of-no-evidence.api -> Program.cs file with your local)
 		  `update-database`
 	
 3. In Visual Studio right click on the sln and select Properties. Set the solution to be multiple project startup and select letter-of-no-evidence.api and letter-of-no-evidence.web as startup projects in that order
@@ -33,4 +33,4 @@ Download and install:
 
 ### Entity relationship diagram
 
-![Letter of no evidence system](https://github.com/nationalarchives/ds-letter-of-no-evidence/assets/40386980/35f8abb0-4627-45de-abc3-25d2d9d9f36a)
+![Letter of no evidence system](https://github.com/nationalarchives/ds-letter-of-no-evidence/assets/40386980/b7c929d8-94d6-45fa-baac-d838f30cdd7c)
