@@ -32,12 +32,6 @@ namespace letter_of_no_evidence.web
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
-            builder.Services.AddSession(options =>
-            {
-                options.Cookie.Name = "LONE.Session";
-                options.Cookie.IsEssential = true;
-            });
-
             builder.Services.AddHttpClient<IPaymentService, PaymentService>(c =>
             {
                 c.BaseAddress = new Uri(Environment.GetEnvironmentVariable("GOV_PAY_URL"));
@@ -62,7 +56,6 @@ namespace letter_of_no_evidence.web
                 app.UseExceptionHandler("/error");
             }
 
-            app.UseSession();
             app.RegisterTNACookieConsent();
             app.UseSecurityHeaderMiddleware();
             app.UseRouting();
