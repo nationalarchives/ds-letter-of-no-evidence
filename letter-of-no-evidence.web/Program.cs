@@ -1,8 +1,10 @@
 using Amazon.Extensions.NETCore.Setup;
 using Amazon.SimpleEmail;
 using letter_of_no_evidence.web.Helper;
+using letter_of_no_evidence.web.Logging;
 using letter_of_no_evidence.web.Service;
 using Microsoft.AspNetCore.Mvc;
+using NLog.Web;
 using System.Net.Http.Headers;
 
 namespace letter_of_no_evidence.web
@@ -27,10 +29,13 @@ namespace letter_of_no_evidence.web
             builder.Services.AddAWSService<IAmazonSimpleEmailService>();
             builder.Services.AddScoped<IEmailService, EmailService>();
 
-            builder.Services.AddMvc(options =>
-            {
-                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            });
+            // Add NLoging to the container.
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+            builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Warning);
+            builder.Host.UseNLog();
+
+            var logger = NLogHelper.ConfigureLogger();
 
             builder.Services.AddHttpClient<IPaymentService, PaymentService>(c =>
             {
@@ -45,6 +50,11 @@ namespace letter_of_no_evidence.web
                 c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
+            builder.Services.AddMvc(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -55,7 +65,7 @@ namespace letter_of_no_evidence.web
             {
                 app.UseExceptionHandler("/error");
             }
-
+            app.ConfigureExceptionHandler(logger);
             app.RegisterTNACookieConsent();
             app.UseSecurityHeaderMiddleware();
             app.UseRouting();

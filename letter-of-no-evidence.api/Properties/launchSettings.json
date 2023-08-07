@@ -19,7 +19,8 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "LONEConnection": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=letter-of-no-evidence",
         "AWS_PROFILE": "devdsadmin",
-        "AWS_REGION": "eu-west-2"
+        "AWS_REGION": "eu-west-2",
+        "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging"
       }
     },
     "IIS Express": {
@@ -30,7 +31,8 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "LONEConnection": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=letter-of-no-evidence",
         "AWS_PROFILE": "devdsadmin",
-        "AWS_REGION": "eu-west-2"
+        "AWS_REGION": "eu-west-2",
+        "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging"
       }
     }
   }

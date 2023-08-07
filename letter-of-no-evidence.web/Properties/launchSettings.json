@@ -20,7 +20,8 @@
         "LONE_Return_URL": "https://localhost:44369/letter-of-no-evidence/request-receipt/",
         "LONE_Amount": "2715",
         "AWS_PROFILE": "devdsadmin",
-        "AWS_REGION": "eu-west-2"
+        "AWS_REGION": "eu-west-2",
+        "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging"
       }
     },
     "letter_of_no_evidence.web": {
@@ -37,7 +38,8 @@
         "Return_URL": "https://localhost:44369/letter-of-no-evidence/request-receipt/",
         "Amount": "2715",
         "AWS_PROFILE": "devdsadmin",
-        "AWS_REGION": "eu-west-2"
+        "AWS_REGION": "eu-west-2",
+        "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging"
       }
     }
   }
