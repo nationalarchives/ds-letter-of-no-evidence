@@ -32,6 +32,8 @@ namespace letter_of_no_evidence.web
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
+            builder.Services.AddDistributedMemoryCache();
+
             builder.Services.AddSession(options =>
             {
                 options.Cookie.Name = "LONE.Session";
@@ -62,10 +64,14 @@ namespace letter_of_no_evidence.web
                 app.UseExceptionHandler("/error");
             }
 
-            app.UseSession();
+            app.UseStaticFiles();
+            app.UseRouting();
             app.RegisterTNACookieConsent();
             app.UseSecurityHeaderMiddleware();
-            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseSession();
 
             var rootPath = Environment.GetEnvironmentVariable("LONE_Root_Path");
             if (!string.IsNullOrWhiteSpace(rootPath))
@@ -76,8 +82,6 @@ namespace letter_of_no_evidence.web
                     return next();
                 });
             }
-            app.UseStaticFiles();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
