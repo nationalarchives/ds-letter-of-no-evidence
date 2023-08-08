@@ -17,7 +17,7 @@ namespace letter_of_no_evidence.api.Logging
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature != null)
                     {
-                        logger.Error($"Error Occurred in Kew Booking API ({Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")} environment): {contextFeature.Error}");
+                        logger.Error($"Error Occurred in LONE API ({Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")} environment): {contextFeature.Error}");
                     }
                 });
             });

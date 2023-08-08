@@ -50,9 +50,17 @@ namespace letter_of_no_evidence.web
                 c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             builder.Services.AddMvc(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
+
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.Name = "LONE.Session";
+                options.Cookie.IsEssential = true;
             });
 
             var app = builder.Build();
@@ -69,6 +77,7 @@ namespace letter_of_no_evidence.web
             app.RegisterTNACookieConsent();
             app.UseSecurityHeaderMiddleware();
             app.UseRouting();
+            app.UseSession();
 
             var rootPath = Environment.GetEnvironmentVariable("LONE_Root_Path");
             if (!string.IsNullOrWhiteSpace(rootPath))
