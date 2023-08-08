@@ -77,7 +77,6 @@ namespace letter_of_no_evidence.web
             app.RegisterTNACookieConsent();
             app.UseSecurityHeaderMiddleware();
             app.UseRouting();
-            app.UseSession();
 
             var rootPath = Environment.GetEnvironmentVariable("LONE_Root_Path");
             if (!string.IsNullOrWhiteSpace(rootPath))
@@ -89,7 +88,7 @@ namespace letter_of_no_evidence.web
                 });
             }
             app.UseStaticFiles();
-            app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
