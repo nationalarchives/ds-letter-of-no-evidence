@@ -22,11 +22,16 @@ namespace letter_of_no_evidence.web
 
             builder.Services.AddControllers();
 
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.Name = "LONE.Session";
+                options.Cookie.IsEssential = true;
+            });
+
             // Get the AWS profile information from configuration providers
             AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
             // Configure AWS service clients to use these credentials
             builder.Services.AddDefaultAWSOptions(awsOptions);
-            builder.Services.AddAWSService<IAmazonSimpleSystemsManagement>(ServiceLifetime.Scoped);
             builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-WEB/DataProtection");
             builder.Services.AddAWSService<IAmazonSimpleEmailService>();
             builder.Services.AddScoped<IEmailService, EmailService>();
@@ -57,12 +62,6 @@ namespace letter_of_no_evidence.web
             builder.Services.AddMvc(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            });
-
-            builder.Services.AddSession(options =>
-            {
-                options.Cookie.Name = "LONE.Session";
-                options.Cookie.IsEssential = true;
             });
 
             var app = builder.Build();
