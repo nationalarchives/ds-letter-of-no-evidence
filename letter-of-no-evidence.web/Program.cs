@@ -1,5 +1,6 @@
 using Amazon.Extensions.NETCore.Setup;
 using Amazon.SimpleEmail;
+using Amazon.SimpleSystemsManagement;
 using letter_of_no_evidence.web.Helper;
 using letter_of_no_evidence.web.Logging;
 using letter_of_no_evidence.web.Service;
@@ -25,6 +26,7 @@ namespace letter_of_no_evidence.web
             AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
             // Configure AWS service clients to use these credentials
             builder.Services.AddDefaultAWSOptions(awsOptions);
+            builder.Services.AddAWSService<IAmazonSimpleSystemsManagement>(ServiceLifetime.Scoped);
             builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-WEB/DataProtection");
             builder.Services.AddAWSService<IAmazonSimpleEmailService>();
             builder.Services.AddScoped<IEmailService, EmailService>();

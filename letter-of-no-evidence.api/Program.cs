@@ -1,4 +1,5 @@
 using Amazon.Extensions.NETCore.Setup;
+using Amazon.SimpleSystemsManagement;
 using letter_of_no_evidence.api.Logging;
 using letter_of_no_evidence.api.Service;
 using letter_of_no_evidence.data;
@@ -20,6 +21,7 @@ namespace letter_of_no_evidence.api
             AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
             // Configure AWS service clients to use these credentials
             builder.Services.AddDefaultAWSOptions(awsOptions);
+            builder.Services.AddAWSService<IAmazonSimpleSystemsManagement>(ServiceLifetime.Scoped);
             builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-API/DataProtection");
 
             // Add NLoging to the container.
