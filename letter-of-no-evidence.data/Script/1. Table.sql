@@ -81,3 +81,17 @@ GO
 COMMIT;
 GO
 
+CREATE USER lone_user FOR LOGIN lone_user;  
+GO
+
+GRANT SELECT, INSERT, UPDATE ON [dbo].[Requests] TO lone_user
+GO
+
+GRANT SELECT, INSERT, UPDATE ON [dbo].[Payments] TO lone_user
+GO
+
+GRANT SELECT, INSERT, UPDATE ON [dbo].[PaymentStatus] TO lone_user
+GO
+
+GRANT SELECT, INSERT, UPDATE ON [dbo].[__EFMigrationsHistory] TO lone_user
+GO

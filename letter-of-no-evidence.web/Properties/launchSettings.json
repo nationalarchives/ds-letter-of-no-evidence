@@ -19,7 +19,7 @@
         "GOV_PAY_API_KEY": "",
         "LONE_Return_URL": "https://localhost:44369/letter-of-no-evidence/request-receipt/",
         "LONE_Amount": "2715",
-        "AWS_PROFILE": "devdsadmin",
+        "AWS_PROFILE": "dev",
         "AWS_REGION": "eu-west-2",
         "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging"
       }
@@ -37,7 +37,7 @@
         "GOV_PAY_API_KEY": "",
         "Return_URL": "https://localhost:44369/letter-of-no-evidence/request-receipt/",
         "Amount": "2715",
-        "AWS_PROFILE": "devdsadmin",
+        "AWS_PROFILE": "dev",
         "AWS_REGION": "eu-west-2",
         "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging"
       }
