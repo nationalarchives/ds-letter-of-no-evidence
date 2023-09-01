@@ -18,10 +18,10 @@ namespace letter_of_no_evidence.api
             builder.Services.AddControllers();
 
             // Get the AWS profile information from configuration providers
-            AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
+            //AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
             // Configure AWS service clients to use these credentials
-            builder.Services.AddDefaultAWSOptions(awsOptions);
-            builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-API/DataProtection");
+            //builder.Services.AddDefaultAWSOptions(awsOptions);
+            //builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-API/DataProtection");
 
             // Add NLoging to the container.
             builder.Logging.ClearProviders();
