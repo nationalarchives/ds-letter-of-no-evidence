@@ -32,7 +32,7 @@ namespace letter_of_no_evidence.web
             AWSOptions awsOptions = builder.Configuration.GetAWSOptions();
             // Configure AWS service clients to use these credentials
             builder.Services.AddDefaultAWSOptions(awsOptions);
-            builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-WEB/DataProtection");
+            //builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-WEB/DataProtection");
             builder.Services.AddAWSService<IAmazonSimpleEmailService>();
             builder.Services.AddScoped<IEmailService, EmailService>();
 
