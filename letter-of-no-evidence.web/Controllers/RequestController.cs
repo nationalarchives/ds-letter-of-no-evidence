@@ -2,7 +2,6 @@
 using letter_of_no_evidence.web.Helper;
 using letter_of_no_evidence.web.Models;
 using letter_of_no_evidence.web.Service;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace letter_of_no_evidence.web.Controllers
@@ -12,20 +11,18 @@ namespace letter_of_no_evidence.web.Controllers
         private readonly IRequestService _requestService;
         private readonly IPaymentService _paymentService;
         private readonly IEmailService _emailService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public RequestController(IRequestService requestService, IPaymentService paymentService, IEmailService emailService, IHttpContextAccessor httpContextAccessor)
+        public RequestController(IRequestService requestService, IPaymentService paymentService, IEmailService emailService)
         {
             _requestService = requestService;
             _paymentService = paymentService;
             _emailService = emailService;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
         public IActionResult SubjectDetails()
         {
-            var model = _httpContextAccessor.HttpContext.Session.GetObject<SubjectDetailsViewModel>("RequestFormDetails");
+            var model = HttpContext.Session.GetObject<SubjectDetailsViewModel>("RequestFormDetails");
             return View(model);
         }
 
@@ -35,8 +32,8 @@ namespace letter_of_no_evidence.web.Controllers
             if (ModelState.IsValid)
             {
                 
-                var requestViewModel = _httpContextAccessor.HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails") ?? new RequestViewModel();
-                _httpContextAccessor.HttpContext.Session.SetObject("RequestFormDetails", model.MapToRequestViewModel(requestViewModel));
+                var requestViewModel = HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails") ?? new RequestViewModel();
+                HttpContext.Session.SetObject("RequestFormDetails", model.MapToRequestViewModel(requestViewModel));
                 return RedirectToAction("ContactDetails");
             }
             return View(model);
@@ -45,7 +42,7 @@ namespace letter_of_no_evidence.web.Controllers
         [HttpGet]
         public IActionResult ContactDetails()
         {
-            var model = _httpContextAccessor.HttpContext.Session.GetObject<ContactDetailsViewModel>("RequestFormDetails");
+            var model = HttpContext.Session.GetObject<ContactDetailsViewModel>("RequestFormDetails");
             return View(model);
         }
 
@@ -58,14 +55,14 @@ namespace letter_of_no_evidence.web.Controllers
             }
             if (ModelState.IsValid)
             {
-                var requestViewModel = _httpContextAccessor.HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
+                var requestViewModel = HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
                 if (model.LetterToRequestor)
                 {
                     requestViewModel = requestViewModel.ClearAgentDetails();
-                    _httpContextAccessor.HttpContext.Session.SetObject("RequestFormDetails", model.MapToRequestViewModel(requestViewModel));
+                    HttpContext.Session.SetObject("RequestFormDetails", model.MapToRequestViewModel(requestViewModel));
                     return RedirectToAction("ContactEmail");
                 }
-                _httpContextAccessor.HttpContext.Session.SetObject("RequestFormDetails", model.MapToRequestViewModel(requestViewModel));
+                HttpContext.Session.SetObject("RequestFormDetails", model.MapToRequestViewModel(requestViewModel));
                 return RedirectToAction("PostalDetails");
             }
             return View(model);
@@ -74,7 +71,7 @@ namespace letter_of_no_evidence.web.Controllers
         [HttpGet]
         public IActionResult PostalDetails()
         {
-            var model = _httpContextAccessor.HttpContext.Session.GetObject<AgentDetailsViewModel>("RequestFormDetails");
+            var model = HttpContext.Session.GetObject<AgentDetailsViewModel>("RequestFormDetails");
             return View(model);
         }
 
@@ -87,8 +84,8 @@ namespace letter_of_no_evidence.web.Controllers
             }
             if (ModelState.IsValid)
             {
-                var requestViewModel = _httpContextAccessor.HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
-                _httpContextAccessor.HttpContext.Session.SetObject("RequestFormDetails", model.MapToRequestViewModel(requestViewModel));
+                var requestViewModel = HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
+                HttpContext.Session.SetObject("RequestFormDetails", model.MapToRequestViewModel(requestViewModel));
                 return RedirectToAction("ContactEmail");
             }
             return View(model);
@@ -97,7 +94,7 @@ namespace letter_of_no_evidence.web.Controllers
         [HttpGet]
         public async Task<IActionResult> ContactEmail()
         {
-            var model = _httpContextAccessor.HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
+            var model = HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
             return View(model);
         }
 
@@ -114,7 +111,7 @@ namespace letter_of_no_evidence.web.Controllers
             }
             if (ModelState.IsValid)
             {
-                _httpContextAccessor.HttpContext.Session.SetObject("RequestFormDetails", model);
+                HttpContext.Session.SetObject("RequestFormDetails", model);
                 return RedirectToAction("RequestSummary");
             }
             return View(model);
@@ -123,7 +120,7 @@ namespace letter_of_no_evidence.web.Controllers
         [HttpGet]
         public IActionResult RequestSummary()
         {
-            var model = _httpContextAccessor.HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
+            var model = HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
             return View(model);
         }
 
@@ -134,7 +131,7 @@ namespace letter_of_no_evidence.web.Controllers
             {
                 return RedirectToAction("ContactEmail");
             }
-            var model = _httpContextAccessor.HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
+            var model = HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
             model.RequestNumber = IdGenerator.TNAReferenceNumber();
 
             var requestModel = model.MapToRequestModel();
@@ -143,7 +140,7 @@ namespace letter_of_no_evidence.web.Controllers
             if (response.IsSuccess)
             {
                 requestModel.Id = response.RequestId;
-                _httpContextAccessor.HttpContext.Session.RemoveObject("RequestFormDetails");
+                HttpContext.Session.RemoveObject("RequestFormDetails");
 
                 return await CreatePayment(requestModel);
             }

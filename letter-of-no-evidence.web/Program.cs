@@ -30,6 +30,7 @@ namespace letter_of_no_evidence.web
                 builder.Logging.AddConsole();
                 builder.Host.UseNLog();
 
+                builder.Services.AddDistributedMemoryCache();
                 builder.Services.AddSession(options =>
                 {
                     options.Cookie.Name = "LONE.Session";
@@ -56,8 +57,6 @@ namespace letter_of_no_evidence.web
                     c.BaseAddress = new Uri(Environment.GetEnvironmentVariable("LONE_WebApi_URL"));
                     c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 });
-
-                builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
                 builder.Services.AddMvc(options =>
                 {
