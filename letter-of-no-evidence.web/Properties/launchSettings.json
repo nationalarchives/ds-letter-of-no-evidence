@@ -21,7 +21,8 @@
         "LONE_Amount": "2715",
         "AWS_PROFILE": "dev",
         "AWS_REGION": "eu-west-2",
-        "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging"
+        "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging",
+        "CACHE_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=letter-of-no-evidence"
       }
     },
     "letter_of_no_evidence.web": {
@@ -39,7 +40,8 @@
         "Amount": "2715",
         "AWS_PROFILE": "dev",
         "AWS_REGION": "eu-west-2",
-        "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging"
+        "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging",
+        "CACHE_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=letter-of-no-evidence"
       }
     }
   }

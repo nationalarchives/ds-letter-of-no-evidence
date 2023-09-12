@@ -30,7 +30,13 @@ namespace letter_of_no_evidence.web
                 builder.Logging.AddConsole();
                 builder.Host.UseNLog();
 
-                builder.Services.AddDistributedMemoryCache();
+                builder.Services.AddDistributedSqlServerCache(options =>
+                {
+                    options.ConnectionString = Environment.GetEnvironmentVariable("CACHE_SQL_CONNECTION");
+                    options.SchemaName = "dbo";
+                    options.TableName = "CacheData";
+                });
+
                 builder.Services.AddSession(options =>
                 {
                     options.Cookie.Name = "LONE.Session";
