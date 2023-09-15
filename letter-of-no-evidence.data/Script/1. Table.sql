@@ -95,3 +95,6 @@ GO
 
 GRANT SELECT, INSERT, UPDATE ON [dbo].[__EFMigrationsHistory] TO lone_user
 GO
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[CacheData] TO lone_user
+GO

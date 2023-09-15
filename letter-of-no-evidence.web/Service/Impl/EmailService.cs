@@ -78,8 +78,8 @@ namespace letter_of_no_evidence.web.Service
 
         public async Task SendD365EmailAsync(RequestModel requestModel)
         {
+            var toAddress = Environment.GetEnvironmentVariable("D365_EMAIL_TO");
             var fromAddress = _configuration.GetValue<string>("EmailSettings:D365EmailFrom");
-            var toAddress = _configuration.GetValue<string>("EmailSettings:D365Emailto");
             var subject = _configuration.GetValue<string>("EmailSettings:D365Subject");
             var payment = requestModel.Payments?.FirstOrDefault();
 

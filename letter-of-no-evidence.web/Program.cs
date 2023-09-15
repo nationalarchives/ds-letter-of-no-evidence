@@ -30,12 +30,16 @@ namespace letter_of_no_evidence.web
                 builder.Logging.AddConsole();
                 builder.Host.UseNLog();
 
-                builder.Services.AddDistributedSqlServerCache(options =>
+                var cacheSqlConnection = Environment.GetEnvironmentVariable("CACHE_SQL_CONNECTION");
+                if (!string.IsNullOrWhiteSpace(cacheSqlConnection))
                 {
-                    options.ConnectionString = Environment.GetEnvironmentVariable("CACHE_SQL_CONNECTION");
-                    options.SchemaName = "dbo";
-                    options.TableName = "CacheData";
-                });
+                    builder.Services.AddDistributedSqlServerCache(options =>
+                    {
+                        options.ConnectionString = cacheSqlConnection;
+                        options.SchemaName = "dbo";
+                        options.TableName = "CacheData";
+                    });
+                }
 
                 builder.Services.AddSession(options =>
                 {

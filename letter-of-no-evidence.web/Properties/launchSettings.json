@@ -21,8 +21,9 @@
         "LONE_Amount": "2715",
         "AWS_PROFILE": "dev",
         "AWS_REGION": "eu-west-2",
+        "D365_EMAIL_TO": "foid365@nationalarchives.gov.uk",
         "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging",
-        "CACHE_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=letter-of-no-evidence"
+        "CACHE_SQL_CONNECTION": ""
       }
     },
     "letter_of_no_evidence.web": {
@@ -40,8 +41,9 @@
         "Amount": "2715",
         "AWS_PROFILE": "dev",
         "AWS_REGION": "eu-west-2",
+        "D365_EMAIL_TO": "foid365@nationalarchives.gov.uk",
         "NLOG_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=Logging",
-        "CACHE_SQL_CONNECTION": "Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=letter-of-no-evidence"
+        "CACHE_SQL_CONNECTION": ""
       }
     }
   }
