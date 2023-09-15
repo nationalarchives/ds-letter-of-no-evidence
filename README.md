@@ -30,6 +30,21 @@ Download and install:
 
 4. The solution should be ready to run. In VS click the Start button to run. The API will open in a browser showing the swagger page and the Web app will open in another browser window. Note the solution by default runs under IIS Express.
 
+### Using AWS RDS SQL Services for distributed caching in ASP.NET Core Web Applications
+1. Open a terminal on your local development machine and install the sql-cache command by executing the following command:
+   
+   ```dotnet tool install --global dotnet-sql-cache```
+
+2. Use the following command to create the caching schema, replacing [ConnectionString] with the Cache database’s connection string:
+   
+   ```dotnet sql-cache create "[ConnectionString]" dbo CacheData```
+
+3. Make sure the sql user have the following permission
+   
+```
+   GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[CacheData] TO <lone_user>
+   GO
+```
 
 ### Entity relationship diagram
 
