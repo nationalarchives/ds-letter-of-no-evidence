@@ -23,7 +23,7 @@
       </p>
 
       <p>
-        This email address is not monitored. If you have any questions about your request for confirmation of no evidence of British naturalisation, contact ceerequests@nationalarchives.gov.uk.
+        This email address is not monitored. If you have any questions about your request for confirmation of no evidence of British naturalisation, contact PaidSearchTeam@nationalarchives.gov.uk.      
       </p>
     </body>
   </xsl:template>
