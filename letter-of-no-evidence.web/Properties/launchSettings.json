@@ -14,6 +14,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "LONE_Root_Path": "/letter-of-no-evidence",
+        "RecordCopying_WebApi_URL": "http://discovery-services.staging.local/recordcopyingserviceapi/",
         "LONE_WebApi_URL": "https://localhost:7212/letter-of-no-evidence-api/",
         "GOV_PAY_URL": "https://publicapi.payments.service.gov.uk/v1/payments/",
         "GOV_PAY_API_KEY": "",
@@ -34,6 +35,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "LONE_Root_Path": "/letter-of-no-evidence",
+        "RecordCopying_WebApi_URL": "http://discovery-services.staging.local/recordcopyingserviceapi/",
         "LONE_WebApi_URL": "https://localhost:7212/letter-of-no-evidence-api/",
         "GOV_PAY_URL": "https://publicapi.payments.service.gov.uk/v1/payments",
         "GOV_PAY_API_KEY": "",
