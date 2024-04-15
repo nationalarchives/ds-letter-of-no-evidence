@@ -129,6 +129,7 @@ namespace letter_of_no_evidence.web.Controllers
             var country = model.LetterToRequestor ? model.ContactCountry : model.AgentCountry;
             var zoneNo = await _recordCopyingService.GetDeliveryZone(country);
             model.PostalCost = await _requestService.GetDeliveryCostAsync(zoneNo);
+            HttpContext.Session.SetObject("RequestFormDetails", model);
             return View(model);
         }
 
@@ -225,7 +226,7 @@ namespace letter_of_no_evidence.web.Controllers
         private async Task<IActionResult> CreatePayment(RequestModel model)
         {
             var retryCount = model.Payments?.Count ?? 0;
-            var amount = int.Parse(Environment.GetEnvironmentVariable("LONE_Amount")) + int.Parse((model.PostalCost * 100).ToString());
+            var amount = int.Parse(Environment.GetEnvironmentVariable("LONE_Amount")) + Convert.ToInt32(model.PostalCost * 100);
             var sessionId = IdGenerator.GenerateSessionId(model.Id);
             var returnURL = $"{Environment.GetEnvironmentVariable("LONE_Return_URL")}{model.RequestNumber}";
 

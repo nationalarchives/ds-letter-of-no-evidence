@@ -88,6 +88,7 @@ namespace letter_of_no_evidence.web.Helper
             requestViewModel.DateOfBirth = model.DateOfBirth;
             requestViewModel.DateOfDeath = model.DateOfDeath;
             requestViewModel.CountryOfBirth = model.CountryOfBirth;
+            requestViewModel.Renunciation = model.Renunciation;
 
             requestViewModel.ContactTitle = model.ContactTitle;
             requestViewModel.ContactFirstName = model.ContactFirstName;
@@ -112,6 +113,7 @@ namespace letter_of_no_evidence.web.Helper
             requestViewModel.DateOfBirth = model.DateOfBirth;
             requestViewModel.DateOfDeath = model.DateOfDeath;
             requestViewModel.CountryOfBirth = model.CountryOfBirth;
+            requestViewModel.Renunciation = model.Renunciation;
 
             return requestViewModel;
         }
