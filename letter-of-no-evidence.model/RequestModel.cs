@@ -11,6 +11,7 @@
         public string? DateOfBirth { get; set; }
         public string? DateOfDeath { get; set; }
         public string? CountryOfBirth { get; set; }
+        public bool Renunciation { get; set; }
         public string? ContactTitle { get; set; }
         public string? ContactFirstName { get; set; }
         public string? ContactLastName { get; set; }
@@ -31,6 +32,7 @@
         public string? AgentPostCode { get; set; }
         public string? AgentCountry { get; set; }
         public string? ContactEmail { get; set; }
+        public decimal PostalCost { get; set; }
         public List<PaymentModel> Payments { get; set; }
     }
 }

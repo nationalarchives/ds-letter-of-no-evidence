@@ -81,6 +81,24 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [DeliveryZoneCost] (
+    [Id] int NOT NULL,
+    [ZoneNo] int NOT NULL,
+    [CostWithTracking] money NOT NULL,
+    CONSTRAINT [PK_DeliveryZoneCost] PRIMARY KEY ([Id])
+);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240415105433_Add-Tracking-Delivery-Cost', N'7.0.16');
+GO
+
+COMMIT;
+GO
+
 CREATE USER lone_user FOR LOGIN lone_user;  
 GO
 
@@ -90,11 +108,14 @@ GO
 GRANT SELECT, INSERT, UPDATE ON [dbo].[Payments] TO lone_user
 GO
 
-GRANT SELECT, INSERT, UPDATE ON [dbo].[PaymentStatus] TO lone_user
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[CacheData] TO lone_user
+GO
+
+GRANT SELECT ON [dbo].[PaymentStatus] TO lone_user
+GO
+
+GRANT SELECT ON [dbo].[DeliveryZoneCost] TO lone_user
 GO
 
 GRANT SELECT, INSERT, UPDATE ON [dbo].[__EFMigrationsHistory] TO lone_user
-GO
-
-GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[CacheData] TO lone_user
 GO

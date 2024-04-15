@@ -17,6 +17,7 @@ namespace letter_of_no_evidence.web.Helper
                 DateOfBirth = model.DateOfBirth,
                 DateOfDeath = model.DateOfDeath,
                 CountryOfBirth = model.CountryOfBirth,
+                Renunciation = model.Renunciation,
                 ContactTitle = model.ContactTitle,
                 ContactFirstName = model.ContactFirstName,
                 ContactLastName = model.ContactLastName,
@@ -37,6 +38,7 @@ namespace letter_of_no_evidence.web.Helper
                 AgentPostCode = model.AgentPostCode,
                 AgentCountry = model.AgentCountry,
                 ContactEmail = model.ContactEmail,
+                PostalCost = model.PostalCost,
                 Payments = new List<PaymentModel>()
             };
             return returnModel;
@@ -51,6 +53,7 @@ namespace letter_of_no_evidence.web.Helper
             requestViewModel.DateOfBirth = model.DateOfBirth;
             requestViewModel.DateOfDeath = model.DateOfDeath;
             requestViewModel.CountryOfBirth = model.CountryOfBirth;
+            requestViewModel.Renunciation = model.Renunciation;
 
             requestViewModel.ContactTitle = model.ContactTitle;
             requestViewModel.ContactFirstName = model.ContactFirstName;

@@ -173,16 +173,8 @@
                         <legend class="mt-lg">Country</legend>
 
                         <div class="form-row">
-                            <label for="AgentCountry" class="sr-only">Country</label>
-                            @if (ViewData.ModelState["AgentCountry"]?.Errors.Count() > 0)
-                            {
-                                @Html.TextBoxFor(Model => Model.AgentCountry, new { @class = "form-warning", placeholder = "Enter country", required = true, aria_describedby = "validation-message-country" })
-                                @Html.ValidationMessageFor(Model => Model.AgentCountry, "", new { @class = "form-error", id = "validation-message-country" })
-                            }
-                            else
-                            {
-                                @Html.TextBoxFor(Model => Model.AgentCountry, new { placeholder = "Enter country", required = true })
-                            }
+                            <label for="ContactCountry" class="sr-only">Country</label>
+                            @Html.DropDownListFor(Model => Model.AgentCountry, @ViewBag.Countries as IEnumerable<SelectListItem>, new { })
                         </div>
                     </fieldset>
 

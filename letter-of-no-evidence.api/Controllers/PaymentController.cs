@@ -9,11 +9,13 @@ namespace letter_of_no_evidence.api.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
+        private readonly IDeliveryService _deliveryService;
         private readonly ILogger _logger;
 
-        public PaymentController(IPaymentService paymentService, ILogger<RequestController> logger)
+        public PaymentController(IPaymentService paymentService, ILogger<RequestController> logger, IDeliveryService deliveryService)
         {
             _paymentService = paymentService;
+            _deliveryService = deliveryService;
             _logger = logger;
         }
 
@@ -22,6 +24,13 @@ namespace letter_of_no_evidence.api.Controllers
         {
             await _paymentService.CreatePaymentAsync(paymentModel);
             return Ok();
+        }
+
+        [HttpGet("getdeliverycost/{zoneNo}")]
+        public async Task<ActionResult<decimal>> GetDeliveryCost(int zoneNo)
+        {
+            var result = await _deliveryService.GetDeliveryCost(zoneNo);
+            return Ok(result);
         }
     }
 }

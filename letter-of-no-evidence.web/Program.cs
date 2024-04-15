@@ -54,6 +54,7 @@ namespace letter_of_no_evidence.web
                 builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager("/LONE-WEB/DataProtection");
                 builder.Services.AddAWSService<IAmazonSimpleEmailService>();
                 builder.Services.AddScoped<IEmailService, EmailService>();
+                builder.Services.AddMemoryCache();
 
                 builder.Services.AddHttpClient<IPaymentService, PaymentService>(c =>
                 {
@@ -65,6 +66,12 @@ namespace letter_of_no_evidence.web
                 builder.Services.AddHttpClient<IRequestService, RequestService>(c =>
                 {
                     c.BaseAddress = new Uri(Environment.GetEnvironmentVariable("LONE_WebApi_URL"));
+                    c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                });
+
+                builder.Services.AddHttpClient<IRecordCopyingService, RecordCopyingService>(c =>
+                {
+                    c.BaseAddress = new Uri(Environment.GetEnvironmentVariable("RecordCopying_WebApi_URL"));
                     c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 });
 

@@ -15,6 +15,7 @@ namespace letter_of_no_evidence.web.Models
         public string birth_date { get; set; }
         public string? death_date { get; set; }
         public string? country_of_birth { get; set; }
+        public string? renunciation { get; set; }
         public string? contact_title { get; set; }
         public string? contact_firstname { get; set; }
         public string contact_lastname { get; set; }

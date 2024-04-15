@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using letter_of_no_evidence.data;
 
@@ -11,9 +12,11 @@ using letter_of_no_evidence.data;
 namespace letter_of_no_evidence.data.Migrations
 {
     [DbContext(typeof(LONEDBContext))]
-    partial class LONEDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240415105433_Add-Tracking-Delivery-Cost")]
+    partial class AddTrackingDeliveryCost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

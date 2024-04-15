@@ -11,12 +11,14 @@ namespace letter_of_no_evidence.web.Controllers
         private readonly IRequestService _requestService;
         private readonly IPaymentService _paymentService;
         private readonly IEmailService _emailService;
+        private readonly IRecordCopyingService _recordCopyingService;
 
-        public RequestController(IRequestService requestService, IPaymentService paymentService, IEmailService emailService)
+        public RequestController(IRequestService requestService, IPaymentService paymentService, IEmailService emailService, IRecordCopyingService recordCopyingService)
         {
             _requestService = requestService;
             _paymentService = paymentService;
             _emailService = emailService;
+            _recordCopyingService = recordCopyingService;
         }
 
         [HttpGet]
@@ -31,7 +33,6 @@ namespace letter_of_no_evidence.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                
                 var requestViewModel = HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails") ?? new RequestViewModel();
                 HttpContext.Session.SetObject("RequestFormDetails", model.MapToRequestViewModel(requestViewModel));
                 return RedirectToAction("ContactDetails");
@@ -40,9 +41,11 @@ namespace letter_of_no_evidence.web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ContactDetails()
+        public async Task<IActionResult> ContactDetails()
         {
+            ViewBag.Countries = await _recordCopyingService.GetCountryAsListItem();
             var model = HttpContext.Session.GetObject<ContactDetailsViewModel>("RequestFormDetails");
+            model.ContactCountry = model.ContactCountry ?? "United Kingdom";
             return View(model);
         }
 
@@ -69,9 +72,11 @@ namespace letter_of_no_evidence.web.Controllers
         }
 
         [HttpGet]
-        public IActionResult PostalDetails()
+        public async Task<IActionResult> PostalDetails()
         {
+            ViewBag.Countries = await _recordCopyingService.GetCountryAsListItem();
             var model = HttpContext.Session.GetObject<AgentDetailsViewModel>("RequestFormDetails");
+            model.AgentCountry = model.AgentCountry ?? "United Kingdom";
             return View(model);
         }
 
@@ -118,9 +123,12 @@ namespace letter_of_no_evidence.web.Controllers
         }
 
         [HttpGet]
-        public IActionResult RequestSummary()
+        public async Task<IActionResult> RequestSummary()
         {
             var model = HttpContext.Session.GetObject<RequestViewModel>("RequestFormDetails");
+            var country = model.LetterToRequestor ? model.ContactCountry : model.AgentCountry;
+            var zoneNo = await _recordCopyingService.GetDeliveryZone(country);
+            model.PostalCost = await _requestService.GetDeliveryCostAsync(zoneNo);
             return View(model);
         }
 
@@ -217,7 +225,7 @@ namespace letter_of_no_evidence.web.Controllers
         private async Task<IActionResult> CreatePayment(RequestModel model)
         {
             var retryCount = model.Payments?.Count ?? 0;
-            var amount = int.Parse(Environment.GetEnvironmentVariable("LONE_Amount"));
+            var amount = int.Parse(Environment.GetEnvironmentVariable("LONE_Amount")) + int.Parse((model.PostalCost * 100).ToString());
             var sessionId = IdGenerator.GenerateSessionId(model.Id);
             var returnURL = $"{Environment.GetEnvironmentVariable("LONE_Return_URL")}{model.RequestNumber}";
 

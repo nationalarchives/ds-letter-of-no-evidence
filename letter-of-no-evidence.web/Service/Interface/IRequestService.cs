@@ -8,5 +8,6 @@ namespace letter_of_no_evidence.web.Service
         Task<RequestResponseModel> UpdateRequestAsync(RequestModel requestModel);
         Task<RequestModel> GetRequestAsync(string requestNumber);
         Task AddNewPaymentAsync(PaymentModel paymentModel);
+        Task<decimal> GetDeliveryCostAsync(int zoneNo);
     }
 }

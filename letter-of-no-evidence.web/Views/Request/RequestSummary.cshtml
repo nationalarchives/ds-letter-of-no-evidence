@@ -1,5 +1,5 @@
 ﻿@model letter_of_no_evidence.web.Models.RequestViewModel
-
+@using letter_of_no_evidence.web.Helper
 @{
     ViewData["Title"] = "Request summary - The National Archives";
 }
@@ -66,6 +66,10 @@
                             <tr>
                                 <th scope="row">Country of birth (optional)</th>
                                 <td>@Html.DisplayFor(model => model.CountryOfBirth)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Renunciation</th>
+                                <td>@(Model.Renunciation ? "Yes" : "No")</td>
                             </tr>
                         </tbody>
                     </table>
@@ -194,18 +198,34 @@
 
                 <div id="enter-your-details-timer" class="full-width warning-panel">
                     <p>
-                        The details you have provided on this application form will appear on the letter as they have been entered in the above fields.
-                    </p>
-                    <p>
+                        The details you have provided on this application form will appear on the letter as they have been entered in the above fields. <br />
                         Once you have made payment, the information you have provided to us cannot be altered.
                     </p>
                     <p>
-                        Do not continue if the summary of the information does not match what you would like included on the letter.
-                    </p>
-                    <p>
+                        Do not continue if the summary of the information does not match what you would like included on the letter. <br />
                         We do not issue refunds if you enter incorrect information.
                     </p>
                 </div>
+
+                <fieldset>
+                    <legend class="mt-lg">Review the cost</legend>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Lone search and letter cost</th>
+                                <td>@CostExtension.LoneCost()</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Tracking postal cost</th>
+                                <td>@CostExtension.FormatedCost(Model.PostalCost)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Total Cost</th>
+                                <td>@CostExtension.FormatedTotalCost(Model.PostalCost)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
 
             </div>
         </div>

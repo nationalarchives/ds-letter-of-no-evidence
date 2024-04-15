@@ -1,4 +1,5 @@
-﻿@{
+﻿@using letter_of_no_evidence.web.Helper
+@{
     ViewData["Title"] = "Letter of no evidence - The National Archives";
 }
 @await Html.PartialAsync("Partials/_Breadcrumbs")
@@ -56,8 +57,7 @@
                         Following receipt of your request, we will carry out a search of our records based
                         on the information submitted. If we find no evidence of British naturalisation, we
                         will send you a letter signed in wet ink confirming no evidence has been
-                        found. The letter will be sent by Royal Mail and will not be tracked. There is a
-                        charge of <strong>£27.15 GBP</strong> for this service, covering the search and the letter.
+                        found. The letter will be sent by tracked Royal Mail. There is a charge of <strong>@CostExtension.LoneCost() GBP</strong> for this service, covering the search and the letter.
                     </p>
                     <p style="text-align:left">
                         This letter is valid for <strong>1 year</strong> from the date of issue.
