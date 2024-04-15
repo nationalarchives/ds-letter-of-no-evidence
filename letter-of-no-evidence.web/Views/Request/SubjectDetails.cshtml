@@ -136,6 +136,14 @@
                             <label for="CountryOfBirth" class="sr-only">Country of birth (optional)</label>
                             @Html.TextBoxFor(Model => Model.CountryOfBirth, new { placeholder = "Enter country of birth" })
                         </div>
+                    
+                        <div class="form-row">
+                            <p class="helper-text">Do you want us to confirm that the subject did not renounce British citizenship?</p>
+
+                            <p class="helper-text">Only tick this box if you need a letter confirming that the subject did not renounce their British citizenship.</p>
+
+                            @Html.CheckBoxFor(model => model.Renunciation) Yes, I require confirmation of no evidence of renunciation.
+                        </div>
                     </fieldset>
 
                     <div class="form-row">

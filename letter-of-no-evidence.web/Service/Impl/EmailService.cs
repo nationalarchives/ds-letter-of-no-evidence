@@ -95,6 +95,7 @@ namespace letter_of_no_evidence.web.Service
                 birth_date = requestModel.DateOfBirth,
                 death_date = requestModel.DateOfDeath,
                 country_of_birth = requestModel.CountryOfBirth,
+                renunciation = requestModel.Renunciation ? "Yes" : "No",
                 contact_title = requestModel.ContactTitle,
                 contact_firstname = requestModel.ContactFirstName,
                 contact_lastname = requestModel.ContactLastName,

@@ -6,3 +6,12 @@ INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (5, 's
 INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (6, 'failed','The payment failed. This failure could be because the payment timed out after 90 minutes, the user’s payment method was rejected, or your user cancelled the payment.')
 INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (7, 'cancelled','Your service cancelled the payment using an API call or the GOV.UK Pay admin tool.')
 INSERT INTO [dbo].[PaymentStatus] ([Id], [Description], [Meaning]) VALUES (8, 'error','Something went wrong with GOV.UK Pay or the underlying payment service provider. The payment failed safely with no money taken from the user.')
+
+
+INSERT INTO [dbo].[DeliveryZoneCost] ([Id], [ZoneNo], [CostWithTracking]) VALUES (1, 1, 3.50)
+INSERT INTO [dbo].[DeliveryZoneCost] ([Id], [ZoneNo], [CostWithTracking]) VALUES (2, 2, 7.90)
+INSERT INTO [dbo].[DeliveryZoneCost] ([Id], [ZoneNo], [CostWithTracking]) VALUES (3, 3, 7.90)
+INSERT INTO [dbo].[DeliveryZoneCost] ([Id], [ZoneNo], [CostWithTracking]) VALUES (4, 4, 7.90)
+INSERT INTO [dbo].[DeliveryZoneCost] ([Id], [ZoneNo], [CostWithTracking]) VALUES (5, 5, 10.55)
+INSERT INTO [dbo].[DeliveryZoneCost] ([Id], [ZoneNo], [CostWithTracking]) VALUES (6, 6, 10.60)
+INSERT INTO [dbo].[DeliveryZoneCost] ([Id], [ZoneNo], [CostWithTracking]) VALUES (7, 7, 10.60)

@@ -12,9 +12,14 @@ namespace letter_of_no_evidence.data
         public DbSet<Request> Requests { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PaymentStatus> PaymentStatus { get; set; }
+        public DbSet<DeliveryZoneCost> DeliveryZoneCost { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<DeliveryZoneCost>().Property(e => e.Id).ValueGeneratedNever();
+            modelBuilder.Entity<DeliveryZoneCost>().Property(e => e.ZoneNo).IsRequired();
+            modelBuilder.Entity<DeliveryZoneCost>().Property(e => e.CostWithTracking).IsRequired().HasColumnType("money"); ;
+
             modelBuilder.Entity<PaymentStatus>().Property(e => e.Id).ValueGeneratedNever();
             modelBuilder.Entity<PaymentStatus>().Property(e => e.Description).IsRequired().HasMaxLength(20);
             modelBuilder.Entity<PaymentStatus>().Property(e => e.Meaning).IsRequired().HasMaxLength(250);

@@ -22,5 +22,6 @@ namespace letter_of_no_evidence.web.Models
         public string? DateOfDeath { get; set; }
         [MaxLength(100)]
         public string? CountryOfBirth { get; set; }
+        public bool Renunciation { get; set; }
     }
 }

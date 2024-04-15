@@ -43,5 +43,13 @@ namespace letter_of_no_evidence.web.Service
             var response = await _client.PutAsJsonAsync("payment/create", paymentModel);
             response.EnsureSuccessStatusCode();
         }
+
+        public async Task<decimal> GetDeliveryCostAsync(int zoneNo)
+        {
+            var response = await _client.GetAsync($"payment/getdeliverycost/{zoneNo}");
+            response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadFromJsonAsync<decimal>();
+            return result;
+        }
     }
 }

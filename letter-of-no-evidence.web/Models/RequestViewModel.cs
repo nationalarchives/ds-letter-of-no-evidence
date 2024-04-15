@@ -1,5 +1,6 @@
 ﻿using letter_of_no_evidence.web.Helper;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Principal;
 
 namespace letter_of_no_evidence.web.Models
 {
@@ -16,5 +17,6 @@ namespace letter_of_no_evidence.web.Models
         [RegularExpression(@"^(?!.*<[^>]+>).*", ErrorMessage = Constants.Html_Tags_Not_Allowed)]
         [Compare("ContactEmail", ErrorMessage = Constants.Email_Not_Match)]
         public string CompareEmail { get; set; }
+        public decimal PostalCost { get; set; }
     }
 }
