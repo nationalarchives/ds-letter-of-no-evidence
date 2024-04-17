@@ -23,6 +23,7 @@ namespace letter_of_no_evidence.web.Service
         public async Task SendCustomerEmailAsync(RequestModel requestModel)
         {
             var payment = requestModel.Payments?.FirstOrDefault();
+            var serviceCost = Decimal.Divide(int.Parse(Environment.GetEnvironmentVariable("LONE_Amount")), 100);
             var fromAddress = _configuration.GetValue<string>("EmailSettings:EmailFrom");
             var subject = $"{_configuration.GetValue<string>("EmailSettings:EmailSubject")}{requestModel.RequestNumber}";
 
@@ -30,8 +31,8 @@ namespace letter_of_no_evidence.web.Service
             rootElement.Add(new XElement("ContactullName", $"{requestModel.ContactFirstName} {requestModel.ContactLastName}"));
             rootElement.Add(new XElement("RequestNumber", requestModel.RequestNumber));
             rootElement.Add(new XElement("SessionId", payment.SessionId));
-            rootElement.Add(new XElement("ServiceCost", payment.Amount - requestModel.PostalCost));
-            rootElement.Add(new XElement("PostalCost", requestModel.PostalCost));
+            rootElement.Add(new XElement("ServiceCost", serviceCost));
+            rootElement.Add(new XElement("PostalCost", payment.Amount - serviceCost));
             rootElement.Add(new XElement("TotalCost", payment.Amount));
             rootElement.Add(new XElement("CreatedDate", $"{payment.TransactionDate:dddd dd MMMM yyyy}"));
 
@@ -84,13 +85,14 @@ namespace letter_of_no_evidence.web.Service
             var fromAddress = _configuration.GetValue<string>("EmailSettings:D365EmailFrom");
             var subject = _configuration.GetValue<string>("EmailSettings:D365Subject");
             var payment = requestModel.Payments?.FirstOrDefault();
+            var serviceCost = Decimal.Divide(int.Parse(Environment.GetEnvironmentVariable("LONE_Amount")), 100);
 
             var mailObject = new D365EmailModel
             {
                 enquiry_id = requestModel.RequestNumber,
                 payment_reference = payment.SessionId,
-                service_cost = payment.Amount - requestModel.PostalCost,
-                postal_cost = requestModel.PostalCost,
+                service_cost = serviceCost,
+                postal_cost = payment.Amount - serviceCost,
                 amount_received = payment.Amount,
                 subject_firstname = requestModel.SubjectFirstName,
                 subject_lastname = requestModel.SubjectLastName,
