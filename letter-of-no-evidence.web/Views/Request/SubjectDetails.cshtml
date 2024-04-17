@@ -136,14 +136,12 @@
                             <label for="CountryOfBirth" class="sr-only">Country of birth (optional)</label>
                             @Html.TextBoxFor(Model => Model.CountryOfBirth, new { placeholder = "Enter country of birth" })
                         </div>
-                    </fieldset>
 
-                    <fieldset>
-                        <legend class="mt-lg">&nbsp;</legend>
-
-                        <div class="form-row">
-                            @Html.CheckBoxFor(model => model.Renunciation) Tick this box if you need a letter to confirm that the subject did not renounce their British citizenship
+                        <div class="form-row checkbox">
+                            @Html.CheckBoxFor(model => model.Renunciation)
+                            <label for="terms-conditions" class="reduce-text">Tick this box if you need a letter to confirm that the subject did not renounce their British citizenship.</label>
                         </div>
+
                         <div class="form-row">
                             <button type="submit" class="button" name="submitbutton">Next</button>
                         </div>
