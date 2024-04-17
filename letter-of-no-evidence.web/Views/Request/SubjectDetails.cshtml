@@ -138,8 +138,8 @@
                         </div>
 
                         <div class="form-row checkbox">
-                            @Html.CheckBoxFor(model => model.Renunciation)
-                            <label for="terms-conditions" class="reduce-text">Tick this box if you need a letter to confirm that the subject did not renounce their British citizenship.</label>
+                            @Html.CheckBoxFor(model => model.Renunciation, new { id = "renunciation" })
+                            <label for="renunciation" class="reduce-text">Tick this box if you need a letter to confirm that the subject did not renounce their British citizenship.</label>
                         </div>
 
                         <div class="form-row">
