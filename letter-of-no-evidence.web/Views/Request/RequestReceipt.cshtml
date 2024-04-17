@@ -61,8 +61,16 @@
                                     <td>@Html.DisplayFor(model => model.SessionId)</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Amount received</th>
-                                    <td>@Html.DisplayFor(model => model.Amount) GBP (no VAT added)</td>
+                                    <th scope="row">Service cost</th>
+                                    <td>@Html.DisplayFor(model => model.ServiceCost) GBP (no VAT added)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Postal cost</th>
+                                    <td>@Html.DisplayFor(model => model.PostalCost) GBP</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Total cost</th>
+                                    <td>@Html.DisplayFor(model => model.TotalCost) GBP</td>
                                 </tr>
                             </tbody>
                         </table>

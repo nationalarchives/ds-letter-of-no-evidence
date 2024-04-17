@@ -5,7 +5,11 @@
     Your payment summary
     Enquiry reference number:  {RequestNumber}
     Payment reference:         {SessionId}
-    Amount received:           {Amount} GBP (no VAT added)
+    Service cost:              {ServiceCost} GBP (no VAT added)
+    Postage cost:              {PostalCost} GBP
+    Total amount received:     {TotalCost} GBP
     Date received:             {CreatedDate}
+
+    You will receive a confirmation email with the outcome of your request within 16 working days.
 
     This email address is not monitored. If you have any questions about your request for confirmation of no evidence of British naturalisation, contact PaidSearchTeam@nationalarchives.gov.uk.

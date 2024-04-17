@@ -30,7 +30,9 @@ namespace letter_of_no_evidence.web.Service
             rootElement.Add(new XElement("ContactullName", $"{requestModel.ContactFirstName} {requestModel.ContactLastName}"));
             rootElement.Add(new XElement("RequestNumber", requestModel.RequestNumber));
             rootElement.Add(new XElement("SessionId", payment.SessionId));
-            rootElement.Add(new XElement("Amount", payment.Amount));
+            rootElement.Add(new XElement("ServiceCost", payment.Amount - requestModel.PostalCost));
+            rootElement.Add(new XElement("PostalCost", requestModel.PostalCost));
+            rootElement.Add(new XElement("TotalCost", payment.Amount));
             rootElement.Add(new XElement("CreatedDate", $"{payment.TransactionDate:dddd dd MMMM yyyy}"));
 
             var xDocument = new XDocument(rootElement);
@@ -87,6 +89,8 @@ namespace letter_of_no_evidence.web.Service
             {
                 enquiry_id = requestModel.RequestNumber,
                 payment_reference = payment.SessionId,
+                service_cost = payment.Amount - requestModel.PostalCost,
+                postal_cost = requestModel.PostalCost,
                 amount_received = payment.Amount,
                 subject_firstname = requestModel.SubjectFirstName,
                 subject_lastname = requestModel.SubjectLastName,

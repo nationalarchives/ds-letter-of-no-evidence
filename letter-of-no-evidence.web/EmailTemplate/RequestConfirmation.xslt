@@ -18,9 +18,13 @@
       <p>
         Enquiry reference number: <xsl:value-of select="RequestNumber" /><br/>
         Payment reference: <xsl:value-of select="SessionId" /><br/>
-        Amount received: <xsl:value-of select="Amount" /> GBP (no VAT added)<br/>
+        Service cost: <xsl:value-of select="ServiceCost" /> GBP (no VAT added)<br/>
+        Postage cost: <xsl:value-of select="PostalCost" /> GBP<br/>
+        Total amount received: <xsl:value-of select="TotalCost" /> GBP<br/>
         Date received: <xsl:value-of select="CreatedDate" />
       </p>
+
+      <p>You will receive a confirmation email with the outcome of your request within 16 working days.</p>
 
       <p>
         This email address is not monitored. If you have any questions about your request for confirmation of no evidence of British naturalisation, contact PaidSearchTeam@nationalarchives.gov.uk.      

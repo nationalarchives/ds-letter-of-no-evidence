@@ -170,7 +170,9 @@ namespace letter_of_no_evidence.web.Controllers
                         {
                             RequestNumber = requestNumber,
                             PaymentStatus = payment.PaymentStatus,
-                            Amount = payment.Amount,
+                            ServiceCost = payment.Amount - response.PostalCost,
+                            PostalCost = response.PostalCost,
+                            TotalCost = payment.Amount,
                             SessionId = payment.SessionId
                         };
 
@@ -203,7 +205,9 @@ namespace letter_of_no_evidence.web.Controllers
                     {
                         RequestNumber = requestNumber,
                         PaymentStatus = paymentModel.PaymentStatus,
-                        Amount = paymentModel.Amount,
+                        ServiceCost = payment.Amount - response.PostalCost,
+                        PostalCost = response.PostalCost,
+                        TotalCost = payment.Amount,
                         SessionId = paymentResponse.reference
                     };
 

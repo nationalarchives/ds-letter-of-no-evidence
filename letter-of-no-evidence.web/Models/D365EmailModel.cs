@@ -7,6 +7,8 @@ namespace letter_of_no_evidence.web.Models
     {
         public string enquiry_id { get; set; }
         public string payment_reference { get; set; }
+        public decimal service_cost { get; set; }
+        public decimal postal_cost { get; set; }
         public decimal amount_received { get; set; }
         public string? subject_firstname { get; set; }
         public string subject_lastname { get; set; }

@@ -208,19 +208,23 @@
                 </div>
 
                 <fieldset>
+                    <legend class="mt-lg">&nbsp;</legend>
+                </fieldset>
+
+                <fieldset>
                     <legend class="mt-lg">Review the cost</legend>
                     <table class="table">
                         <tbody>
                             <tr>
-                                <th scope="row">Lone search and letter cost</th>
+                                <th scope="row">Service cost</th>
                                 <td>@CostExtension.LoneCost()</td>
                             </tr>
                             <tr>
-                                <th scope="row">Tracking postal cost</th>
+                                <th scope="row">Postage cost</th>
                                 <td>@CostExtension.FormatedCost(Model.PostalCost)</td>
                             </tr>
                             <tr>
-                                <th scope="row">Total Cost</th>
+                                <th scope="row">Total cost</th>
                                 <td>@CostExtension.FormatedTotalCost(Model.PostalCost)</td>
                             </tr>
                         </tbody>
