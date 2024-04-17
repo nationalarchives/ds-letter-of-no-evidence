@@ -159,6 +159,7 @@ namespace letter_of_no_evidence.web.Controllers
         public async Task<IActionResult> RequestReceipt(string requestNumber)
         {
             var response = await _requestService.GetRequestAsync(requestNumber);
+            var serviceCost = Decimal.Divide(int.Parse(Environment.GetEnvironmentVariable("LONE_Amount")), 100);
             if (response != null)
             {
                 var payment = response.Payments?.OrderByDescending(x => x.Id)?.FirstOrDefault();
@@ -170,8 +171,8 @@ namespace letter_of_no_evidence.web.Controllers
                         {
                             RequestNumber = requestNumber,
                             PaymentStatus = payment.PaymentStatus,
-                            ServiceCost = payment.Amount - response.PostalCost,
-                            PostalCost = response.PostalCost,
+                            ServiceCost = serviceCost,
+                            PostalCost = payment.Amount - serviceCost,
                             TotalCost = payment.Amount,
                             SessionId = payment.SessionId
                         };
@@ -205,8 +206,8 @@ namespace letter_of_no_evidence.web.Controllers
                     {
                         RequestNumber = requestNumber,
                         PaymentStatus = paymentModel.PaymentStatus,
-                        ServiceCost = payment.Amount - response.PostalCost,
-                        PostalCost = response.PostalCost,
+                        ServiceCost = serviceCost,
+                        PostalCost = payment.Amount - serviceCost,
                         TotalCost = payment.Amount,
                         SessionId = paymentResponse.reference
                     };
