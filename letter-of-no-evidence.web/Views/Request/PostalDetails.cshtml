@@ -1,5 +1,6 @@
-﻿@model letter_of_no_evidence.web.Models.AgentDetailsViewModel
-
+﻿@using letter_of_no_evidence.web.Service
+@model letter_of_no_evidence.web.Models.AgentDetailsViewModel
+@inject IRecordCopyingService RecordCopyingService
 
 @{
     ViewData["Title"] = "Contact details - The National Archives";
@@ -174,8 +175,8 @@
                         <legend class="mt-lg">Country</legend>
 
                         <div class="form-row">
-                            <label for="ContactCountry" class="sr-only">Country</label>
-                            @Html.DropDownListFor(Model => Model.AgentCountry, @ViewBag.Countries as IEnumerable<SelectListItem>, new { })
+                            <label for="AgentCountry" class="sr-only">Country</label>
+                            @Html.DropDownListFor(Model => Model.AgentCountry, await RecordCopyingService.GetCountryAsListItem(), new { id = "AgentCountry" })
                         </div>
                     </fieldset>
 

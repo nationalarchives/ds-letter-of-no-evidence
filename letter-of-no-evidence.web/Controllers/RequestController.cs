@@ -43,7 +43,6 @@ namespace letter_of_no_evidence.web.Controllers
         [HttpGet]
         public async Task<IActionResult> ContactDetails()
         {
-            ViewBag.Countries = await _recordCopyingService.GetCountryAsListItem();
             var model = HttpContext.Session.GetObject<ContactDetailsViewModel>("RequestFormDetails");
             model.ContactCountry = model.ContactCountry ?? "United Kingdom";
             return View(model);
@@ -74,7 +73,6 @@ namespace letter_of_no_evidence.web.Controllers
         [HttpGet]
         public async Task<IActionResult> PostalDetails()
         {
-            ViewBag.Countries = await _recordCopyingService.GetCountryAsListItem();
             var model = HttpContext.Session.GetObject<AgentDetailsViewModel>("RequestFormDetails");
             model.AgentCountry = model.AgentCountry ?? "United Kingdom";
             return View(model);
