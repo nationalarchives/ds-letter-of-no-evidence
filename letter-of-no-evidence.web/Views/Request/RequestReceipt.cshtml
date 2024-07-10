@@ -35,8 +35,13 @@
                 else
                 {
                     <div class="summary-error-message">
-                        <h2>There is a problem.</h2>
-                        <p>Your payment was un-successful, please try again.</p>
+                        <h2>There was a problem with your payment: @Model.Message</h2>
+                    </div>
+                    <p>Your payment was not completed and your card was not charged.</p>
+                    <p>If you would like to try paying again (perhaps with a different card) then click the "Continue to payment" button again.</p>
+                    <div class="form-row">
+                        <a class="button secondary" href="@Url.Action("Index", "Home")">Start again</a>
+                        <a class="button primary" href="@Url.Action("TryAgain", "Request", new { requestNumber = Model.RequestNumber })">Continue to payment</a>
                     </div>
                 }
             </div>
@@ -74,17 +79,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </fieldset>
-                }
-                else
-                {
-                    <fieldset>
-                        <legend class="mt-lg">Try again the payment</legend>
-
-                        <div class="form-row">
-                            <a class="button secondary" href="@Url.Action("Index", "Home")">Start again</a>
-                            <a class="button primary" href="@Url.Action("TryAgain", "Request", new { requestNumber = Model.RequestNumber })">Continue to payment</a>
-                        </div>
                     </fieldset>
                 }
             </div>

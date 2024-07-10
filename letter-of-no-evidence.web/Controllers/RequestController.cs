@@ -207,7 +207,8 @@ namespace letter_of_no_evidence.web.Controllers
                         ServiceCost = serviceCost,
                         PostalCost = payment.Amount - serviceCost,
                         TotalCost = payment.Amount,
-                        SessionId = paymentResponse.reference
+                        SessionId = paymentResponse.reference,
+                        Message = paymentResponse?.state?.message
                     };
 
                     return View(model);
@@ -221,6 +222,9 @@ namespace letter_of_no_evidence.web.Controllers
             var response = await _requestService.GetRequestAsync(requestNumber);
             if (response != null)
             {
+                var country = response.LetterToRequestor ? response.ContactCountry : response.AgentCountry;
+                var zoneNo = await _recordCopyingService.GetDeliveryZone(country);
+                response.PostalCost = await _requestService.GetDeliveryCostAsync(zoneNo);
                 return await CreatePayment(response);
             }
             return NotFound();

@@ -10,5 +10,6 @@ namespace letter_of_no_evidence.web.Models
         public decimal? PostalCost { get; set; }
         public decimal? TotalCost { get; set; }
         public PaymentStatus? PaymentStatus { get; set; }
+        public string? Message { get; set; }
     }
 }
