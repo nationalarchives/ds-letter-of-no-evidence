@@ -26,27 +26,30 @@ on:
 
 jobs:
   Docker:
-    name: Docker
+    name: Build and Push LONE Docker Images
     runs-on: ubuntu-latest
     
     environment: inter-site 
     env:
       AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}            
 
-    if: github.ref == 'refs/heads/main'
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+    - name: Checkout repo
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
       
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: ${{ env.AWS_ROLE_ARN }}
         aws-region: eu-west-2
+        role-session-name: LONE_GitAction        
 
     - name: Login to Amazon ECR
       id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+      uses: aws-actions/amazon-ecr-login@v2
 
     - name: Build, tag, and push the API to ECR
       if: ${{ github.event.inputs.create_lone_api == 'true' }}
