@@ -4,23 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace letter_of_no_evidence.api.Controllers
 {
-    [Route("letter-of-no-evidence-api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class RequestController : ControllerBase
     {
         private readonly IRequestService _requestService;
-        private readonly ILogger _logger;
 
-        public RequestController(IRequestService requestService, ILogger<RequestController> logger)
+        public RequestController(IRequestService requestService)
         {
             _requestService = requestService;
-            _logger = logger;
-        }
-
-        [HttpGet("ping")]
-        public async Task<ActionResult> Ping()
-        {
-            return Ok("API is up and running!!!");
         }
 
         [HttpGet("getrequest/{requestNumber}")]

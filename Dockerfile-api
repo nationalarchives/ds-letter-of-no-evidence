@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
 RUN apk add icu-libs
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 WORKDIR /app
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://*:8080
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 WORKDIR /src
 COPY ["letter-of-no-evidence.api/letter-of-no-evidence.api.csproj", "letter-of-no-evidence.api/"]
 COPY ["letter-of-no-evidence.data/letter-of-no-evidence.data.csproj", "letter-of-no-evidence.data/"]
