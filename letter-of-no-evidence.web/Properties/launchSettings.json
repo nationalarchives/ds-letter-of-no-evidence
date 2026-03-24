@@ -19,7 +19,7 @@
         "GOV_PAY_URL": "https://publicapi.payments.service.gov.uk/v1/payments/",
         "GOV_PAY_API_KEY": "",
         "LONE_Return_URL": "https://localhost:44369/letter-of-no-evidence/request-receipt/",
-        "LONE_Amount": "2715",
+        "LONE_Amount": "3895",
         "AWS_PROFILE": "dev",
         "AWS_REGION": "eu-west-2",
         "D365_EMAIL_TO": "foid365@nationalarchives.gov.uk",
