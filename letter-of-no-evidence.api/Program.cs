@@ -3,7 +3,7 @@ using letter_of_no_evidence.api.Logging;
 using letter_of_no_evidence.api.Service;
 using letter_of_no_evidence.data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using NLog;
 using NLog.Web;
 
